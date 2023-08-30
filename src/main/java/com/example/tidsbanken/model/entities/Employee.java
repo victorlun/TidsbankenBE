@@ -1,4 +1,4 @@
-package com.example.tidsbanken.model;
+package com.example.tidsbanken.model.entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,7 +6,6 @@ import java.util.Set;
 import com.example.tidsbanken.enumerator.AuthRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +18,6 @@ public class Employee {
 
     @Id
     @Schema(description = "ID of the employee", example = "12345")
-    @NotNull
     private long employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,29 +29,24 @@ public class Employee {
     @Schema(description = "Employees managed by this manager")
     private Set<Employee> subordinates = new HashSet<>();
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     @Schema(description = "First name of the employee", example = "John")
-    @NotNull
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     @Schema(description = "Last name of the employee", example = "Doe")
-    @NotNull
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     @Schema(description = "Email of the employee", example = "john.doe@gmail.com")
-    @NotNull
     private String email;
 
-    @Column(name = "work_role")
+    @Column(name = "work_role", nullable = false)
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
-    @NotNull
     private String role;
 
-    @Column(name = "auth_role")
+    @Column(name = "auth_role", nullable = false)
     @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
-    @NotNull
     private AuthRole authRole;
 
     /*
