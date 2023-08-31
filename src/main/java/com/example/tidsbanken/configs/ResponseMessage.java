@@ -1,4 +1,4 @@
-package com.example.tidsbanken.keycloak;
+package com.example.tidsbanken.configs;
 
 import lombok.Getter;
 import lombok.Setter;
