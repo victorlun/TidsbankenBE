@@ -1,6 +1,7 @@
 package com.example.tidsbanken.services.blocked_period;
 
 import com.example.tidsbanken.model.entities.BlockedPeriod;
+import com.example.tidsbanken.model.entities.Period;
 import com.example.tidsbanken.repositories.BlockedPeriodRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,8 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
     }
 
     @Override
-    public BlockedPeriod findById(Long id) {
-        return blockedPeriodRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
+    public BlockedPeriod findById(Period period) {
+        return null;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        blockedPeriodRepository.deleteById(id);
+    public void deleteById(Period period) {
+
     }
 }
