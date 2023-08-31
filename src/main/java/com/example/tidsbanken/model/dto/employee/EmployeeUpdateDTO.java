@@ -17,10 +17,7 @@ public class EmployeeUpdateDTO {
     private String firstName;
     private Set<Employee> subordinates = new HashSet<>();
     private String lastName;
-
     private String email;
-
     private String role;
-
     private AuthRole authRole;
 }
