@@ -2,9 +2,10 @@ package com.example.tidsbanken.services.vacation_response;
 
 import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.repositories.VacationResponseRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-
+@Service
 public class VacationResponseServiceImpl implements VacationResponseService {
     private final VacationResponseRepository vacationResponseRepository;
 
