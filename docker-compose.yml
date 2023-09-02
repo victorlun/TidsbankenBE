@@ -8,3 +8,13 @@ services:
       POSTGRES_DB: tidsbanken
     ports:
       - "5432:5432"
+
+# Security configuration
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - PROXY_ADDRESS_FORWARDING=true
+
+    command: ["-b", "0.0.0.0"]
