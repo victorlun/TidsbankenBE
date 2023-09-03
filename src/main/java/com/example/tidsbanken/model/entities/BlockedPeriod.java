@@ -12,9 +12,9 @@ import lombok.Setter;
 @Setter
 public class BlockedPeriod {
     @Id
-    @OneToOne
-    @JoinColumn (name = "period_id")
-    private Period period;
+    //@OneToOne
+    //@JoinColumn (name = "period_id")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "employee_id")
@@ -31,7 +31,7 @@ public class BlockedPeriod {
      * @param employee     The manager who issues the blocked period
      */
     public BlockedPeriod(Period period, Employee employee) {
-        this.period = period;
+        //this.period = period;
         this.employee = employee;
     }
 }
