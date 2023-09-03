@@ -2,6 +2,7 @@ package com.example.tidsbanken.configs;
 
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.logging.Logger;
 
 
 @Configuration
@@ -20,34 +22,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthConverter jwtAuthConverter;
-   // public static final String ADMIN = "client_admin";
-   // public static final String USER = "client_user";
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests(authorize -> {authorize
-                        .requestMatchers(HttpMethod.GET, "/tidsbanken-docs","/tidsbanken-docs/").permitAll()
-                        //.requestMatchers(HttpMethod.GET, "/employees/public1").hasRole(ADMIN)
-                       // .requestMatchers(HttpMethod.GET, "/employees/public2").hasRole(USER)
-                        //.requestMatchers(HttpMethod.GET, "/employees/public3").hasAnyRole(ADMIN, USER)
-                       // .requestMatchers(request -> request.getRequestURI().startsWith("/swagger")).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/tidsbanken/public","/tidsbanken/private","/tidsbanken-docs/**").permitAll()
+                        .requestMatchers(request -> request.getRequestURI().startsWith("/swagger")).permitAll()
                         .anyRequest().authenticated();
     });
+
         http.
                 oauth2ResourceServer(oauth2 -> oauth2.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)
                 ));
-
         http.
                 sessionManagement((session) ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         return http.build();
     }
-
-
 
 }
 
