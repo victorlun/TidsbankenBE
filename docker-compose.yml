@@ -7,10 +7,9 @@ services:
     env_file:
       - .env
     ports:
-feature-security
-      - "5432:5432"
+      - "5432:5432"  # Correct indentation for ports
 
-# Security configuration
+  # Security configuration
   keycloak:
     image: jboss/keycloak
     environment:

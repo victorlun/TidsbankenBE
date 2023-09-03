@@ -2,8 +2,6 @@ package com.example.tidsbanken.model.dto.employee;
 
 import com.example.tidsbanken.enumerator.AuthRole;
 import com.example.tidsbanken.model.entities.Employee;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
