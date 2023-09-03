@@ -1,6 +1,6 @@
 package com.example.tidsbanken.services.period;
 
-import com.example.tidsbanken.model.entities.Period;
+import com.example.tidsbanken.model.Period;
 import com.example.tidsbanken.repositories.PeriodRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,13 +1,15 @@
-package com.example.tidsbanken.model.entities;
+package com.example.tidsbanken.model;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
-import com.example.tidsbanken.model.entities.Employee;
-import com.example.tidsbanken.model.entities.Period;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "vacation_request")
 @Schema(description = "Represents a vacation request")
 public class VacationRequest {
