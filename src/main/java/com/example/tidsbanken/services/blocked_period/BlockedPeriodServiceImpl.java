@@ -1,7 +1,7 @@
 package com.example.tidsbanken.services.blocked_period;
 
-import com.example.tidsbanken.model.entities.BlockedPeriod;
-import com.example.tidsbanken.model.entities.Period;
+import com.example.tidsbanken.model.BlockedPeriod;
+import com.example.tidsbanken.model.Period;
 import com.example.tidsbanken.repositories.BlockedPeriodRepository;
 import org.springframework.stereotype.Service;
 
