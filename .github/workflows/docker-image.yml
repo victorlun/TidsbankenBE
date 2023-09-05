@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-
-env:
-  APP_NAME: TidsbankenBE
-
 jobs:
   build:
     runs-on: ubuntu-latest
