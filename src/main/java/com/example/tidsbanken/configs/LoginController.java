@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @GetMapping("/public")
     public String getPublic(){
-        return "Anyone can access";
+        return "Anyone can access (cont. deploy)";
     }
     @GetMapping("/public-1")
     public String getPublic1(){
