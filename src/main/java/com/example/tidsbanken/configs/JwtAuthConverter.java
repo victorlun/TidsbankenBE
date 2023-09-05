@@ -26,7 +26,6 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     public JwtAuthConverter(JwtAuthConverterProperties jwtAuthConverterProperties){
         this.jwtAuthConverterProperties = jwtAuthConverterProperties;
     }
-
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
         Collection<GrantedAuthority> authorities = Stream.concat(
@@ -35,7 +34,6 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
 
         return new JwtAuthenticationToken(jwt, authorities, getPrincipalClaimName(jwt));
     }
-
     private String getPrincipalClaimName(Jwt jwt) {
         String claimName = JwtClaimNames.SUB;
         if (jwtAuthConverterProperties.getPrincipalAttribute() != null) {
