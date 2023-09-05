@@ -1,50 +1,48 @@
 package com.example.tidsbanken.configs;
-import lombok.RequiredArgsConstructor;
-
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 @RequiredArgsConstructor
-
 public class SecurityConfig {
+
     private final JwtAuthConverter jwtAuthConverter;
-    public static String ADMIN  ="client_admin";
-    public static  String USER = "client_user";
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/tidsbanken/public").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/tidsbanken/public-1").hasRole(USER)
-                        .requestMatchers(HttpMethod.GET, "/tidsbanken/public-2").hasRole(ADMIN)
-                        .requestMatchers(request -> request.getRequestURI().startsWith("/swagger")).permitAll()
-                        .anyRequest().authenticated()
-                );
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.disable());
+        http
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        http.
-                oauth2ResourceServer(oauth2 -> oauth2.jwt(
-                        jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)
-                ));
-        http.
-                sessionManagement((session) ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+                .authorizeHttpRequests((authz) -> authz
+                        // Allow unauthenticated access to the specified path.
+                        .requestMatchers("/api/v1/resources/public").permitAll()
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer((oauth2) -> oauth2
+                        // Configure JWT-based authentication and sets a custom JWT authentication converter.
+                        .jwt(jwt -> jwt
+                                .jwtAuthenticationConverter(jwtAuthConverter)));
+
         return http.build();
     }
 
+
+
+
+
 }
+
+
 
 
