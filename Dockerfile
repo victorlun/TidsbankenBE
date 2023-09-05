@@ -17,6 +17,6 @@ WORKDIR /app
 # Copy the compiled JAR file from the build stage into the runtime image
 COPY --from=build /app/target/Tidsbanken-0.0.1-SNAPSHOT.jar /app/demo.jar
 # Expose the port the application listens on
-EXPOSE 8081
+EXPOSE 8080
 # Run the application
 CMD ["java", "-jar", "demo.jar"]

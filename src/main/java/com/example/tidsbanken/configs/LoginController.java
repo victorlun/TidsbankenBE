@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("api/v1/resources")
 public class LoginController {
 
-    @GetMapping("public")
+   @GetMapping("public")
     public ResponseEntity<String> publicEndpoint() {
         return new ResponseEntity<>(
                 "ANY one can access it.",
