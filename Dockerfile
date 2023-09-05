@@ -6,8 +6,9 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 # Copy the source code into the container
 COPY src ./src
-
-RUN mvn package
+# Debugging purpose, also cleaning the cache
+RUN rm -rf /root/.m2/repository
+RUN mvn package -DskipTests
 
 
 # Stage 2: Create the runtime image
