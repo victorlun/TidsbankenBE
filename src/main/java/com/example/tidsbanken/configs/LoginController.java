@@ -14,8 +14,12 @@ public class LoginController {
     public String getPublic(){
         return "Anyone can access";
     }
-    @GetMapping("/private")
-    public String getPrivate(){
+    @GetMapping("/public-1")
+    public String getPublic1(){
+        return "USER can access";
+    }
+    @GetMapping("/public-2")
+    public String getPublic2(){
         return "ADMIN can access";
     }
 
