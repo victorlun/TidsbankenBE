@@ -54,7 +54,7 @@ public class BlockedPeriodController {
                 return new ResponseEntity<>("Invalid input. BlockedPeriod or Employee is null.", HttpStatus.BAD_REQUEST);
             }
             existingBlockedPeriod.setEmployee(updatedBlockedPeriod.getEmployee());
-            existingBlockedPeriod.setId(updatedBlockedPeriod.getId());
+            existingBlockedPeriod.setBlockedPeriodId(updatedBlockedPeriod.getBlockedPeriodId());
             blockedPeriodService.update(existingBlockedPeriod);
             return ResponseEntity.noContent().build();
         } else {

@@ -21,7 +21,6 @@ public class VacationResponse {
     @JoinColumn(name = "vacation_request_id")
     private VacationRequest vacationRequest;
 
-    
     @Enumerated(EnumType.STRING)
     @Column(name = "vacation_response")
     private Response response;
