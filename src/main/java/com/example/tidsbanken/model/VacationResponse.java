@@ -21,7 +21,7 @@ public class VacationResponse {
     @JoinColumn(name = "vacation_request_id")
     private VacationRequest vacationRequest;
 
-    @Column(name = "vacation_response")
+    @Column(name = "vacation_response", nullable = false, length = 100)
     private Response response;
 
     @Column(name = "response_comment")

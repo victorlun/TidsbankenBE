@@ -16,6 +16,7 @@ public class VacationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vacationRequestId;
+
     @OneToOne
     @JoinColumn(name = "period_id")
     @Schema(description = "The ID of the period the request is regarding.", example = "2")
