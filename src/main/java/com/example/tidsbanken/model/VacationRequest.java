@@ -22,14 +22,17 @@ public class VacationRequest {
     @Schema(description = "The ID of the period the request is regarding.", example = "2")
     private Period period;
 
-    @OneToOne
+    @ManyToOne  // Changed from @OneToOne
     @JoinColumn(name = "employee_id")
     @Schema(description = "The ID of the employee the request is regarding.", example = "12345")
     private Employee employee;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     @Schema(description = "The status of the vacation request.", example = "VacationStatus.PENDING")
     private VacationStatus vacationStatus;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "vacation_type")
     @Schema(description = "The specified type for the vacation requested.", example = "VacationType.PARENTAL_LEAVE")
     private VacationType vacationType;

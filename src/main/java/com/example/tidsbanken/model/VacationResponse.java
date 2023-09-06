@@ -21,7 +21,9 @@ public class VacationResponse {
     @JoinColumn(name = "vacation_request_id")
     private VacationRequest vacationRequest;
 
-    @Column(name = "vacation_response", nullable = false, length = 100)
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vacation_response")
     private Response response;
 
     @Column(name = "response_comment")

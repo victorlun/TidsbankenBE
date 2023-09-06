@@ -1,6 +1,7 @@
 package com.example.tidsbanken.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.example.tidsbanken.enumerator.AuthRole;
@@ -45,9 +46,13 @@ public class Employee {
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
     private String role;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "auth_role", nullable = false)
     @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
     private AuthRole authRole;
+
+    @OneToMany(mappedBy = "employee")  // Opposite side of the relationship
+    private List<VacationRequest> vacationRequests;
 
     /*
      * Default constructor
