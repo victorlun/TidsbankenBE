@@ -11,14 +11,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BlockedPeriod {
-    @Id
-    //@OneToOne
-    //@JoinColumn (name = "period_id")
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long blockedPeriodId; // New ID
 
-    @OneToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+        @OneToOne
+        @JoinColumn(name = "period_id")
+        private Period period;
+
+        @OneToOne
+        @JoinColumn(name = "employee_id")
+        private Employee employee;
 
     /*
      * Default constructor
@@ -31,7 +34,7 @@ public class BlockedPeriod {
      * @param employee     The manager who issues the blocked period
      */
     public BlockedPeriod(Period period, Employee employee) {
-        //this.period = period;
+        this.period = period;
         this.employee = employee;
     }
 }
