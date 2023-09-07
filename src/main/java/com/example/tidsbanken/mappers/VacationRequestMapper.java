@@ -1,0 +1,16 @@
+package com.example.tidsbanken.mappers;
+
+import com.example.tidsbanken.model.VacationRequest;
+import com.example.tidsbanken.model.dtos.VacationRequestDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+
+@Mapper(componentModel = "Spring")
+public abstract class VacationRequestMapper {
+    @Mappings({
+            @Mapping(source = "employee.employeeId", target = "employee"), // Assuming Employee has an "id" property
+            @Mapping(source = "period.periodId", target = "periodId")
+    })
+    public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
+}

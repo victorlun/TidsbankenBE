@@ -18,15 +18,13 @@ public class VacationRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vacationRequestId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "period_id")
-    @Schema(description = "The ID of the period the request is regarding.", example = "2")
     private Period period;
 
     @JsonIgnore
-    @ManyToOne  // Changed from @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
-    @Schema(description = "The ID of the employee the request is regarding.", example = "12345")
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
