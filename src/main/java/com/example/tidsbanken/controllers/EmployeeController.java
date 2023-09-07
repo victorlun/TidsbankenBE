@@ -69,7 +69,7 @@ public class EmployeeController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasAnyRole({'user', 'admin})")
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
         Employee existingEmployee = employeeService.findById(id);
