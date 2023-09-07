@@ -1,8 +1,6 @@
 package com.example.tidsbanken.controllers;
 
-import com.example.tidsbanken.enumerator.Response;
-import com.example.tidsbanken.model.VacationRequest;
-import com.example.tidsbanken.model.VacationResponse;
+import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import com.example.tidsbanken.services.vacation_response.VacationResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/v1/response")

@@ -1,7 +1,7 @@
 package com.example.tidsbanken.controllers;
 import com.example.tidsbanken.mappers.VacationRequestMapper;
-import com.example.tidsbanken.model.VacationRequest;
-import com.example.tidsbanken.model.dtos.VacationRequestDTO;
+import com.example.tidsbanken.model.entities.VacationRequest;
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @RestController

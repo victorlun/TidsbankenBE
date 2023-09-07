@@ -1,6 +1,6 @@
 package com.example.tidsbanken.controllers;
 
-import com.example.tidsbanken.model.Employee;
+import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.services.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,21 +1,16 @@
-package com.example.tidsbanken.model.dtos;
+package com.example.tidsbanken.model.dtos.VacationRequest;
 
-import com.example.tidsbanken.enumerator.Response;
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
-import com.example.tidsbanken.model.Employee;
-import com.example.tidsbanken.model.VacationResponse;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Data
 @Getter
 @Setter
-public class VacationRequestDTO {
+public class VacationRequestUpdateDTO {
     private Long vacationRequestId;
 
     @Schema(description = "The ID of the period the request is regarding.", example = "2")
@@ -32,5 +27,4 @@ public class VacationRequestDTO {
 
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarten.")
     private String notes;
-
 }

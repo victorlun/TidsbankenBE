@@ -1,7 +1,9 @@
-package com.example.tidsbanken.model;
+package com.example.tidsbanken.model.entities;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
+import com.example.tidsbanken.model.entities.Employee;
+import com.example.tidsbanken.model.entities.Period;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

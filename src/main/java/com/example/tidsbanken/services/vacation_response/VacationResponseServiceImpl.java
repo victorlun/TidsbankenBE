@@ -1,6 +1,6 @@
 package com.example.tidsbanken.services.vacation_response;
 
-import com.example.tidsbanken.model.VacationResponse;
+import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.repositories.VacationResponseRepository;
 import org.springframework.stereotype.Service;
 

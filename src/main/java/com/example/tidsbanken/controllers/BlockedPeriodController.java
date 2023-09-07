@@ -1,13 +1,10 @@
 package com.example.tidsbanken.controllers;
 
-import com.example.tidsbanken.model.BlockedPeriod;
-import com.example.tidsbanken.model.Employee;
+import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;

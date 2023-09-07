@@ -1,7 +1,7 @@
 package com.example.tidsbanken.mappers;
 
-import com.example.tidsbanken.model.VacationRequest;
-import com.example.tidsbanken.model.dtos.VacationRequestDTO;
+import com.example.tidsbanken.model.entities.VacationRequest;
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

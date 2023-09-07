@@ -1,4 +1,4 @@
-package com.example.tidsbanken.model;
+package com.example.tidsbanken.model.entities;
 
 import java.util.HashSet;
 import java.util.List;
