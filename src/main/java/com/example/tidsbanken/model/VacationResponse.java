@@ -14,6 +14,7 @@ import lombok.Setter;
 public class VacationResponse {
     @Id
     @Schema(description = "ID of a vacation response", example = "123")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long vacationResponseId;
 
     @Getter
@@ -22,10 +23,10 @@ public class VacationResponse {
     private VacationRequest vacationRequest;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "vacation_response")
+    @Column(name = "vacation_response",nullable = false)
     private Response response;
 
-    @Column(name = "response_comment")
+    @Column(name = "response_comment",nullable = false)
     private String responseComment;
 
     public VacationResponse(){}

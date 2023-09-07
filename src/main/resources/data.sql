@@ -1,6 +1,6 @@
 
 SELECT * FROM period;
-/*
+
 --Dummy data for 'period' table
 INSERT INTO period (start_date, end_date) VALUES ('2023-05-01', '2023-05-07');
 INSERT INTO period (start_date, end_date) VALUES ('2023-06-01', '2023-06-07');
@@ -9,7 +9,7 @@ INSERT INTO period (start_date, end_date) VALUES ('2023-08-01', '2023-08-07');
 INSERT INTO period (start_date, end_date) VALUES ('2023-09-01', '2023-09-07');
 
 -- Dummy data for 'employee' table
-INSERT INTO employee (employee_id, first_name, last_name, email, work_role, auth_role) VALUES (1, 'Alice', 'Manager', 'alice.manager@email.com', 'Senior Manager', 'MANAGER');
+INSERT INTO employee (employee_id, first_name, last_name, email, work_role, auth_role) VALUES (12, 'Alice', 'Manager', 'alice.manager@email.com', 'Senior Manager', 'MANAGER');
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (2, 1, 'Bob', 'Developer', 'bob.developer@email.com', 'Junior Developer', 'EMPLOYEE');
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (3, 1, 'Charlie', 'Developer', 'charlie.developer@email.com', 'Mid-level Developer', 'EMPLOYEE');
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (4, 1, 'David', 'Manager', 'david.manager@email.com', 'Mid-level Manager', 'MANAGER');
@@ -26,4 +26,3 @@ INSERT INTO vacation_request (period_id, employee_id, status, vacation_type, not
 
 -- Dummy data for 'vacation_response' table
 INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (2, 2, 'DENIED', 'Sorry, we need you during that period.');
-*/

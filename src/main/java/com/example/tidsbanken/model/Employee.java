@@ -19,6 +19,7 @@ public class Employee {
 
     @Id
     @Schema(description = "ID of the employee", example = "12345")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,6 +28,7 @@ public class Employee {
     private Employee manager;
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "first_name", nullable = false)
     @Schema(description = "Employees managed by this manager")
     private Set<Employee> subordinates = new HashSet<>();
 
