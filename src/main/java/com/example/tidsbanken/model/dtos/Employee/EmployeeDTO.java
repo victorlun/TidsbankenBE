@@ -1,5 +1,6 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
+import com.example.tidsbanken.enumerator.AuthRole;
 import com.example.tidsbanken.model.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -14,8 +15,8 @@ import java.util.Set;
 public class EmployeeDTO {
     private long employeeId;
 
-    @Schema(description = "Manager of the employee")
-    private Employee manager;
+    @Schema(description = "ID of the manager")
+    private Long managerId;
 
     @Schema(description = "Employees managed by this manager")
     private Set<Employee> subordinates = new HashSet<>();
@@ -30,6 +31,11 @@ public class EmployeeDTO {
 
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
     private String role;
+
+    @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
+    private AuthRole authRole;
+
+
 
 
 }

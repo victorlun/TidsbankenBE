@@ -1,5 +1,6 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
+import com.example.tidsbanken.enumerator.AuthRole;
 import com.example.tidsbanken.model.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -29,5 +30,9 @@ public class EmployeePostDTO {
 
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
     private String role;
+
+    @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
+    private AuthRole authRole;
+
 
 }

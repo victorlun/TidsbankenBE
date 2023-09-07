@@ -59,7 +59,6 @@ public class EmployeeController {
         if (!isValidEmail(employee.getEmail())) {
             return false;
         }
-
         return true;
     }
 
