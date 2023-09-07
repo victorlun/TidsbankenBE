@@ -2,6 +2,7 @@ package com.example.tidsbanken.model;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,14 +18,13 @@ public class VacationRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vacationRequestId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "period_id")
-    @Schema(description = "The ID of the period the request is regarding.", example = "2")
     private Period period;
 
-    @ManyToOne  // Changed from @OneToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
-    @Schema(description = "The ID of the employee the request is regarding.", example = "12345")
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
@@ -40,6 +40,7 @@ public class VacationRequest {
     @Column(name = "notes")
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarden.")
     private String notes;
+
 
     public VacationRequest() {}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.tidsbanken.enumerator.AuthRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Employee {
     @Schema(description = "Manager of the employee")
     private Employee manager;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "first_name", nullable = false)
     @Schema(description = "Employees managed by this manager")
@@ -53,6 +55,7 @@ public class Employee {
     @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
     private AuthRole authRole;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")  // Opposite side of the relationship
     private List<VacationRequest> vacationRequests;
 

@@ -21,8 +21,8 @@ INSERT INTO blocked_period (period_id, employee_id) VALUES (1, 1);
 INSERT INTO blocked_period (period_id, employee_id) VALUES (2, 4);
 
 --Dummy data for 'vacation_request' table
-INSERT INTO vacation_request (period_id, employee_id, status, vacation_type, notes) VALUES (3, 1, 'PENDING', 'PARENTAL_LEAVE', 'Parental leave for vacation.');
-INSERT INTO vacation_request (period_id, employee_id, status, vacation_type, notes) VALUES (4, 1, 'HANDLED', 'VACATION_LEAVE', 'Annual leave for vacation.');
+INSERT INTO vacation_request (period_id, employee_id, status, vacation_type, notes) VALUES (3, 5, 'PENDING', 'PARENTAL_LEAVE', 'Parental leave for vacation.');
+INSERT INTO vacation_request (period_id, employee_id, status, vacation_type, notes) VALUES (4, 4, 'HANDLED', 'VACATION_LEAVE', 'Annual leave for vacation.');
 
 -- Dummy data for 'vacation_response' table
 INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (2, 2, 'DENIED', 'Sorry, we need you during that period.');

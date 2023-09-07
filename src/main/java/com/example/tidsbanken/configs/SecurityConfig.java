@@ -28,6 +28,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         // Allow unauthenticated access to the specified path.
                         .requestMatchers("/api/v1/resources/public").permitAll()
+                        .requestMatchers("/api/v1/request").permitAll()
+                        .requestMatchers("/api/v1/response").permitAll()
+                        .requestMatchers("/api/v1/periods").permitAll()
+                        .requestMatchers("/api/v1/blocked-periods").permitAll()
+                        .requestMatchers("/api/v1/employees/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2
                         // Configure JWT-based authentication and sets a custom JWT authentication converter.
@@ -36,13 +41,5 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
-
-
-
 }
-
-
-
 
