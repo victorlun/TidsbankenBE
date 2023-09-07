@@ -41,6 +41,7 @@ public class VacationRequest {
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarden.")
     private String notes;
 
+
     public VacationRequest() {}
 
     public VacationRequest(Period period, Employee employee, VacationStatus vacationStatus, VacationType vacationType, String notes) {

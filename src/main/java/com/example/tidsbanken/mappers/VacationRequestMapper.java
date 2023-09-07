@@ -9,8 +9,8 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "Spring")
 public abstract class VacationRequestMapper {
     @Mappings({
-            @Mapping(source = "employee.employeeId", target = "employee"), // Assuming Employee has an "id" property
-            @Mapping(source = "period.periodId", target = "periodId")
+            @Mapping(source = "employee.employeeId", target = "employeeId"),
+            @Mapping(source = "period.periodId", target = "periodId"),
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
 }
