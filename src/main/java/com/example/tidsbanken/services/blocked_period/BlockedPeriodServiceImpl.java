@@ -16,8 +16,8 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
     }
 
     @Override
-    public BlockedPeriod findById(Period period) {
-        return null;
+    public BlockedPeriod findById(Long id) {
+        return blockedPeriodRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
     }
 
     @Override
@@ -36,7 +36,8 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
     }
 
     @Override
-    public void deleteById(Period period) {
+    public void deleteById(Long id) {
+        blockedPeriodRepository.deleteById(id);
 
     }
 }
