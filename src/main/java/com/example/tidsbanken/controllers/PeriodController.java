@@ -1,6 +1,6 @@
 package com.example.tidsbanken.controllers;
 
-import com.example.tidsbanken.model.Period;
+import com.example.tidsbanken.model.entities.Period;
 import com.example.tidsbanken.services.period.PeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

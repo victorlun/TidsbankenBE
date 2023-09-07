@@ -1,27 +1,37 @@
 package com.example.tidsbanken.controllers;
-import com.example.tidsbanken.model.VacationRequest;
+import com.example.tidsbanken.mappers.VacationRequestMapper;
+import com.example.tidsbanken.model.entities.VacationRequest;
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/request")
 public class VacationRequestController {
     private final VacationRequestService vacationRequestService;
-
+    private final VacationRequestMapper vacationRequestMapper;
     @Autowired
-    public VacationRequestController(VacationRequestService vacationRequestService) {
+    public VacationRequestController(VacationRequestService vacationRequestService, VacationRequestMapper vacationRequestMapper) {
         this.vacationRequestService = vacationRequestService;
+        this.vacationRequestMapper = vacationRequestMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<VacationRequest>> getAll(){
+    public ResponseEntity<List<VacationRequestDTO>> getAll(){
         List<VacationRequest> vacationRequests = vacationRequestService.findAll().stream().toList();
-        return new ResponseEntity<>(vacationRequests, HttpStatus.OK);
+        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
+
+        for(VacationRequest vacationRequest : vacationRequests){
+            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
+        }
+
+        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
     @GetMapping("{id}")
     public ResponseEntity<VacationRequest> getById(@PathVariable Long id){

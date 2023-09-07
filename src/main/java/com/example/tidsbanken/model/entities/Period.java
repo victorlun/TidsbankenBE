@@ -1,4 +1,4 @@
-package com.example.tidsbanken.model;
+package com.example.tidsbanken.model.entities;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -19,11 +19,11 @@ public class Period {
     @Schema(description = "ID of the period", example = "123")
     private Long periodId;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date",nullable = false)
     @Schema(description = "Start date of a period", example = "2023-05-01")
     LocalDate startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date",nullable = false)
     @Schema(description = "End date of a period", example = "2023-05-07")
     LocalDate endDate;
 

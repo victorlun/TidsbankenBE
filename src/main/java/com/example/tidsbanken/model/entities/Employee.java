@@ -1,4 +1,4 @@
-package com.example.tidsbanken.model;
+package com.example.tidsbanken.model.entities;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +20,7 @@ public class Employee {
 
     @Id
     @Schema(description = "ID of the employee", example = "12345")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,6 +30,7 @@ public class Employee {
 
     @JsonIgnore
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "first_name", nullable = false)
     @Schema(description = "Employees managed by this manager")
     private Set<Employee> subordinates = new HashSet<>();
 
