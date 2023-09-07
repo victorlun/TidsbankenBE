@@ -2,6 +2,7 @@ package com.example.tidsbanken.model;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class VacationRequest {
     @Schema(description = "The ID of the period the request is regarding.", example = "2")
     private Period period;
 
+    @JsonIgnore
     @ManyToOne  // Changed from @OneToOne
     @JoinColumn(name = "employee_id")
     @Schema(description = "The ID of the employee the request is regarding.", example = "12345")
