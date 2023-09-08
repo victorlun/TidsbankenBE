@@ -2,6 +2,7 @@ package com.example.tidsbanken.controllers;
 
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 @RestController
 @RequestMapping("/api/v1/blocked-periods")
+@Tag(name ="BlockedPeriod", description = "Endpoints to interact with BlockedPeriods")
 public class BlockedPeriodController {
     private final BlockedPeriodService blockedPeriodService;
 
