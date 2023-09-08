@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDate;
 
 
 @Data
@@ -16,8 +17,11 @@ import lombok.Setter;
 public class VacationRequestDTO {
     private Long vacationRequestId;
 
-    @Schema(description = "The ID of the period the request is regarding.", example = "2")
-    private Long periodId;
+    @Schema(description = "The start date of the request")
+    private LocalDate startDate;
+
+    @Schema(description = "The end date of the request")
+    private LocalDate endDate;
 
     @Schema(description = "The ID of the employee the request is regarding.", example = "12345")
     private Long employeeId;
