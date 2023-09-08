@@ -21,7 +21,6 @@ public class VacationRequestController {
         this.vacationRequestService = vacationRequestService;
         this.vacationRequestMapper = vacationRequestMapper;
     }
-
     @GetMapping
     public ResponseEntity<List<VacationRequestDTO>> getAll(){
         List<VacationRequest> vacationRequests = vacationRequestService.findAll().stream().toList();
@@ -70,5 +69,16 @@ public class VacationRequestController {
         vacationRequestService.deleteById(id);
 
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/byEmployee/{id}")
+    public ResponseEntity<List<VacationRequestDTO>> getByEmployeeId(@PathVariable Long id) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(id);
+        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
+
+        for (VacationRequest vacationRequest : vacationRequests) {
+            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
+        }
+
+        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
 }
