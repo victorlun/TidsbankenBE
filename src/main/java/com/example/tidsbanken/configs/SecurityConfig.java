@@ -28,10 +28,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         // Allow unauthenticated access to the specified path.
                         .requestMatchers("/api/v1/resources/public").permitAll()
-                        .requestMatchers("/api/v1/request").permitAll()
-                        .requestMatchers("/api/v1/response").permitAll()
-                        .requestMatchers("/api/v1/periods").permitAll()
-                        .requestMatchers("/api/v1/blocked-periods").permitAll()
+                        .requestMatchers("/api/v1/request/**").permitAll()
+                        .requestMatchers("/api/v1/response/**").permitAll()
+                        .requestMatchers("/api/v1/periods/**").permitAll()
+                        .requestMatchers("/api/v1/blocked-periods/**").permitAll()
                         .requestMatchers("/api/v1/employees/**").permitAll()
                         .requestMatchers("swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
