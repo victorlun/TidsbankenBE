@@ -3,6 +3,7 @@ package com.example.tidsbanken.controllers;
 import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import com.example.tidsbanken.services.vacation_response.VacationResponseService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/response")
+@Tag(name ="VacationResponse", description = "Endpoints to interact with VacationResponses")
 public class VacationResponseController {
 
     private final VacationResponseService vacationResponseService;

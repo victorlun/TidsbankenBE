@@ -3,6 +3,7 @@ import com.example.tidsbanken.mappers.VacationRequestMapper;
 import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/request")
+@Tag(name ="VacationRequest", description = "Endpoints to interact with VacationRequests")
 public class VacationRequestController {
     private final VacationRequestService vacationRequestService;
     private final VacationRequestMapper vacationRequestMapper;
