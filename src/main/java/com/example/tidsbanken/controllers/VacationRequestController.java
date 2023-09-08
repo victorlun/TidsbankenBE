@@ -56,7 +56,8 @@ public class VacationRequestController {
         oldVacationRequest.setVacationRequestId(newVacationRequest.getVacationRequestId());
         oldVacationRequest.setVacationType(newVacationRequest.getVacationType());
         oldVacationRequest.setEmployee(newVacationRequest.getEmployee());
-        oldVacationRequest.setPeriod(newVacationRequest.getPeriod());
+        oldVacationRequest.setStartDate(newVacationRequest.getStartDate());
+        oldVacationRequest.setEndDate(newVacationRequest.getEndDate());
         oldVacationRequest.setNotes(newVacationRequest.getNotes());
 
         vacationRequestService.update(oldVacationRequest);

@@ -2,6 +2,8 @@ package com.example.tidsbanken.model.dtos.VacationRequest;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
+import com.example.tidsbanken.model.dtos.VacationRequest.serializer.VacationTypeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class VacationRequestDTO {
     private VacationStatus vacationStatus;
 
     @Schema(description = "The specified type for the vacation requested.", example = "VacationType.PARENTAL_LEAVE")
+    @JsonSerialize(using = VacationTypeSerializer.class)
     private VacationType vacationType;
 
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarten.")

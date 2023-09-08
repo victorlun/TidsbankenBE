@@ -2,13 +2,13 @@ package com.example.tidsbanken.model.entities;
 
 import com.example.tidsbanken.enumerator.VacationStatus;
 import com.example.tidsbanken.enumerator.VacationType;
-import com.example.tidsbanken.model.entities.Employee;
-import com.example.tidsbanken.model.entities.Period;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -20,9 +20,11 @@ public class VacationRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vacationRequestId;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "period_id")
-    private Period period;
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -46,8 +48,7 @@ public class VacationRequest {
 
     public VacationRequest() {}
 
-    public VacationRequest(Period period, Employee employee, VacationStatus vacationStatus, VacationType vacationType, String notes) {
-      this.period =period;
+    public VacationRequest(Employee employee, VacationStatus vacationStatus, VacationType vacationType, String notes) {
       this.employee = employee;
       this.vacationStatus = vacationStatus;
       this.vacationType = vacationType;
