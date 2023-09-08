@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/periods").permitAll()
                         .requestMatchers("/api/v1/blocked-periods").permitAll()
                         .requestMatchers("/api/v1/employees/**").permitAll()
+                        .requestMatchers("swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2
                         // Configure JWT-based authentication and sets a custom JWT authentication converter.
