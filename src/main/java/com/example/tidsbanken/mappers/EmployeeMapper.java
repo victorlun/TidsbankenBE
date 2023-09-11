@@ -42,10 +42,17 @@ public abstract class EmployeeMapper {
     }
 
     @Mapping(source = "employeeId", target = "employeeId")
-    @Mapping(source = "firstName", target = "firstName")
-    @Mapping(source = "lastName", target = "lastName")
+    @Mapping(source = "manager.employeeId", target = "managerId")
     @Mapping(source = "vacationRequests", target = "requests")
     public abstract EmployeeWithRequestsDTO employeeToEmployeeWithRequestsDTO(Employee employee);
+
+    @AfterMapping
+    protected void fillManagerName(Employee employee, @MappingTarget EmployeeWithRequestsDTO dto) {
+        if (employee.getManager() != null) {
+            dto.setManagerName(employee.getManager().getFirstName() + " " + employee.getManager().getLastName());
+        }
+    }
+
 
     @Mappings({
             @Mapping(source = "employee.employeeId", target = "employeeId"),

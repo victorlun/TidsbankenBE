@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class EmployeeWithRequestsDTO {
     private Long employeeId;
-    private String firstName;
-    private String lastName;
+    private Long managerId;
+    private String managerName;
     private List<VacationRequestDTO> requests;
 }
