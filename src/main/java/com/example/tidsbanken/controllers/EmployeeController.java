@@ -1,5 +1,7 @@
 package com.example.tidsbanken.controllers;
 
+import com.example.tidsbanken.mappers.EmployeeMapper;
+import com.example.tidsbanken.model.dtos.Employee.EmployeeDTO;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
 import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.services.employee.EmployeeService;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,16 +21,22 @@ import java.util.List;
 @Tag(name ="Employee", description = "Endpoints to interact with Employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final EmployeeMapper employeeMapper;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
     @CrossOrigin
     @GetMapping
-    public ResponseEntity<Collection<Employee>> getAllEmployees() {
+    public ResponseEntity<Collection<EmployeeDTO>> getAllEmployees() {
         Collection<Employee> employees = employeeService.findAll();
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+        Collection<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee employee : employees) {
+          employeeDTOS.add(employeeMapper.employeeToEmployeeDTO(employee));
+        }
+        return  new ResponseEntity<>(employeeDTOS,HttpStatus.OK);
     }
     @CrossOrigin
     @GetMapping("/{id}")
@@ -86,7 +95,6 @@ public class EmployeeController {
         existingEmployee.setManager(updatedEmployee.getManager());
         existingEmployee.setEmail(updatedEmployee.getEmail());
         existingEmployee.setAuthRole(updatedEmployee.getAuthRole());
-
         employeeService.update(existingEmployee);
         return ResponseEntity.noContent().build();
     }

@@ -57,8 +57,6 @@ public class VacationResponseController {
         oldVacationResponse.setResponse(newVacationResponse.getResponse());
         oldVacationResponse.setResponseComment(newVacationResponse.getResponseComment());
         oldVacationResponse.setVacationRequest(newVacationResponse.getVacationRequest());
-
-
         vacationResponseService.update(oldVacationResponse);
 
         return ResponseEntity.noContent().build();
