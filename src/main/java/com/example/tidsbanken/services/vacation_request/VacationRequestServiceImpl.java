@@ -1,6 +1,8 @@
 package com.example.tidsbanken.services.vacation_request;
 
+import com.example.tidsbanken.enumerator.Response;
 import com.example.tidsbanken.model.entities.VacationRequest;
+import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.repositories.VacationRequestRepository;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +50,16 @@ public class VacationRequestServiceImpl implements VacationRequestService{
                 .filter(vacationRequest -> vacationRequest.getEmployee().getEmployeeId()==(employeeId))
                 .collect(Collectors.toList());
     }
+    @Override
+    public List<VacationRequest> findByEmployeeIdApprovedOrPending(Long employeeId) {
+        return vacationRequestRepository.findAll()
+                .stream()
+                .filter(vacationRequest -> vacationRequest.getEmployee().getEmployeeId()==(employeeId))
+                .filter(vacationRequest -> {
+                    VacationResponse response = vacationRequest.getVacationResponse();
+                    return response == null || Response.APPROVED.equals(response.getResponse());
+                })
+                .collect(Collectors.toList());
+    }
+
 }

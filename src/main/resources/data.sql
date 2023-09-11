@@ -28,6 +28,8 @@ INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacati
 INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (3, 4, 'APPROVED', 'Your public holiday extension is approved.');
 
 
+
+INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-10-10', '2023-10-12', 5, 'HANDLED', 'PARENTAL_LEAVE', 'Need some time of to help my son with homework');
+INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (4, 6, 'DENIED', 'This is not a valid reason for parental leave...');
+
 */
-
-

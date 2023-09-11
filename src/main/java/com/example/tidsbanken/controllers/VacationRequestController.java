@@ -72,9 +72,20 @@ public class VacationRequestController {
 
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/byEmployee/{id}")
-    public ResponseEntity<List<VacationRequestDTO>> getByEmployeeId(@PathVariable Long id) {
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long id) {
         List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(id);
+        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
+
+        for (VacationRequest vacationRequest : vacationRequests) {
+            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
+        }
+
+        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
+    }
+    @GetMapping("/employee/{id}/approved_or_pending")
+    public ResponseEntity<List<VacationRequestDTO>> getByEmployeeApprovedOrPending(@PathVariable Long id) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeIdApprovedOrPending(id);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
 
         for (VacationRequest vacationRequest : vacationRequests) {
