@@ -2,11 +2,11 @@ package com.example.tidsbanken.mappers;
 
 import com.example.tidsbanken.enumerator.AuthRole;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeDTO;
+import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.model.entities.Employee;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
+import com.example.tidsbanken.model.entities.VacationRequest;
+import org.mapstruct.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,5 +40,21 @@ public abstract class EmployeeMapper {
                     return employee;
                 }).collect(Collectors.toSet());
     }
+
+    @Mapping(source = "employeeId", target = "employeeId")
+    @Mapping(source = "firstName", target = "firstName")
+    @Mapping(source = "lastName", target = "lastName")
+    @Mapping(source = "vacationRequests", target = "requests")
+    public abstract EmployeeWithRequestsDTO employeeToEmployeeWithRequestsDTO(Employee employee);
+
+    @Mappings({
+            @Mapping(source = "employee.employeeId", target = "employeeId"),
+            @Mapping(source = "vacationResponse.response", target = "vacationResponse"),
+            @Mapping(source = "vacationResponse.vacationResponseId", target = "vacationResponseId"),
+            @Mapping(source = "employee.firstName", target = "firstName"),
+            @Mapping(source = "employee.lastName", target = "lastName"),
+    })
+    public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
+
 
 }
