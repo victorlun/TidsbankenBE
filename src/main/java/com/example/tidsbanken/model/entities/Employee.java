@@ -21,6 +21,7 @@ public class Employee {
     @Id
     @Schema(description = "ID of the employee", example = "12345")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private long employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -60,9 +61,10 @@ public class Employee {
     private List<VacationRequest> vacationRequests;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "employee_id_bp")
-    private Employee employee;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<BlockedPeriod> blockedPeriods;
+
+
 
 
     /*

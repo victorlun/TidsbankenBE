@@ -11,7 +11,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import com.example.tidsbanken.mappers.BlockedPeriodMapper;
 import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
 import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodPostDTO;
+import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodUpdateDTO;
 import com.example.tidsbanken.model.entities.BlockedPeriod;
+import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
 import com.example.tidsbanken.services.employee.EmployeeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -63,14 +65,18 @@ public class BlockedPeriodController {
         return new ResponseEntity<>(newBlockedPeriod, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateBlockedPeriod(@PathVariable Long id, @RequestBody BlockedPeriod updatedBlockedPeriod) {
+    public ResponseEntity<?> updateBlockedPeriod(@PathVariable Long id, @RequestBody BlockedPeriodUpdateDTO updatedBlockedPeriod) {
         BlockedPeriod existingBlockedPeriod = blockedPeriodService.findById(id);
         if (existingBlockedPeriod != null) {
-            if (updatedBlockedPeriod == null || updatedBlockedPeriod.getEmployee() == null) {
+            if (updatedBlockedPeriod == null || employeeService.findById(updatedBlockedPeriod.getEmployeeId()) == null) {
+                // Return a more detailed error message and use HttpStatus.BAD_REQUEST
                 return new ResponseEntity<>("Invalid input. BlockedPeriod or Employee is null.", HttpStatus.BAD_REQUEST);
             }
-            existingBlockedPeriod.setEmployee(updatedBlockedPeriod.getEmployee());
-            existingBlockedPeriod.setBlockedPeriodId(updatedBlockedPeriod.getBlockedPeriodId());
+            Employee employee = employeeService.findById(updatedBlockedPeriod.getEmployeeId());
+
+            existingBlockedPeriod.setEmployee(employee);
+            existingBlockedPeriod.setStartDate(updatedBlockedPeriod.getStartDate());
+            existingBlockedPeriod.setEndDate(updatedBlockedPeriod.getEndDate());
             blockedPeriodService.update(existingBlockedPeriod);
             return ResponseEntity.noContent().build();
         } else {

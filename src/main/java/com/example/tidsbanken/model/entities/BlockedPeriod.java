@@ -17,27 +17,16 @@ public class BlockedPeriod {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long blockedPeriodId; // New ID
 
-        @Column(name = "start_date")
+        @Column(name = "start_date", nullable = false)
+        @Schema(description = "Start date of the blocked period", example = "2023-09-12")
         private LocalDate startDate;
 
-        @Column(name = "end_date")
+        @Column(name = "end_date", nullable = false)
+        @Schema(description = "End date of the blocked period", example = "2023-09-15")
         private LocalDate endDate;
 
-       @ManyToOne
-       @JoinColumn(name = "employee_id_bp")
-       private Employee employee;
-    /*
-     * Default constructor
-     */
-    public BlockedPeriod() {
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
-    }
-  //  /*
-  //   * @param period       The period of the blocked period.
-  //   * @param employee     The manager who issues the blocked period
-  //   */
-  //  public BlockedPeriod(Period period, Employee employee) {
-//
-  //      this.employee = employee;
-  //  }
 }
