@@ -1,6 +1,6 @@
 package com.example.tidsbanken.services.vacation_request;
 
-import com.example.tidsbanken.enumerator.Response;
+import com.example.tidsbanken.utils.enumerators.Response;
 import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.model.entities.VacationResponse;
 import com.example.tidsbanken.repositories.VacationRequestRepository;

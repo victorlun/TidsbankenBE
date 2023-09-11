@@ -1,6 +1,5 @@
 package com.example.tidsbanken.mappers;
 
-import com.example.tidsbanken.enumerator.AuthRole;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeDTO;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;

@@ -1,7 +1,7 @@
 package com.example.tidsbanken.model.dtos.VacationRequest;
 
-import com.example.tidsbanken.enumerator.VacationStatus;
-import com.example.tidsbanken.enumerator.VacationType;
+import com.example.tidsbanken.utils.enumerators.VacationStatus;
+import com.example.tidsbanken.utils.enumerators.VacationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.Getter;

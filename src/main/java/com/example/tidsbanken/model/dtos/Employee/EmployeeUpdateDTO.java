@@ -1,6 +1,6 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
-import com.example.tidsbanken.enumerator.AuthRole;
+import com.example.tidsbanken.utils.enumerators.AuthRole;
 import com.example.tidsbanken.model.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

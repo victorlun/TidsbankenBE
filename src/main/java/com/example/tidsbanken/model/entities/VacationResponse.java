@@ -1,6 +1,6 @@
 package com.example.tidsbanken.model.entities;
 
-import com.example.tidsbanken.enumerator.Response;
+import com.example.tidsbanken.utils.enumerators.Response;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;

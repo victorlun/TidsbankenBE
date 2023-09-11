@@ -1,4 +1,4 @@
-package com.example.tidsbanken.enumerator;
+package com.example.tidsbanken.utils.enumerators;
 
 public enum VacationType {
     PARENTAL_LEAVE,
