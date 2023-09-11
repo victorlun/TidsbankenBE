@@ -59,6 +59,12 @@ public class Employee {
     @OneToMany(mappedBy = "employee")  // Opposite side of the relationship
     private List<VacationRequest> vacationRequests;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "employee_id_bp")
+    private Employee employee;
+
+
     /*
      * Default constructor
      */

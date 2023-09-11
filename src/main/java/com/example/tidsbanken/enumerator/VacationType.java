@@ -1,18 +1,9 @@
 package com.example.tidsbanken.enumerator;
 
 public enum VacationType {
-    PARENTAL_LEAVE("Parental Leave"),
-    SICK_LEAVE("Sick Leave"),
-    VACATION_LEAVE("Vacation Leave"),
-    PUBLIC_HOLIDAY("Public Holiday");
+    PARENTAL_LEAVE,
+    SICK_LEAVE,
+    VACATION_LEAVE,
+    PUBLIC_HOLIDAY
 
-    private String displayValue;
-
-    private VacationType(String displayValue) {
-        this.displayValue = displayValue;
-    }
-
-    public String getDisplayValue() {
-        return displayValue;
-    }
 }

@@ -11,8 +11,9 @@ INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, wor
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (8, 4, 'Helen', 'Baker', 'helen.baker@email.com', 'Senior Developer', 'EMPLOYEE');
 
 --Dummy data for 'blocked_period' table
-INSERT INTO blocked_period (start_date, end_date, employee_id) VALUES ('2023-06-01', '2023-06-07', 1);
-INSERT INTO blocked_period (start_date, end_date, employee_id) VALUES ('2023-09-01', '2023-09-07', 4);
+INSERT INTO blocked_period (start_date, end_date, employee_id_bp) VALUES ('2023-06-01', '2023-06-07', 1);
+INSERT INTO blocked_period (start_date, end_date, employee_id_bp) VALUES ('2023-09-11', '2023-09-11', 1);
+INSERT INTO blocked_period (start_date, end_date, employee_id_bp) VALUES ('2023-09-01', '2023-09-07', 4);
 
 --Dummy data for 'vacation_request' table
 INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-07-09', '2023-07-15', 5, 'HANDLED', 'PARENTAL_LEAVE', 'Parental leave for vacation.');
@@ -32,4 +33,5 @@ INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacati
 INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-10-10', '2023-10-12', 5, 'HANDLED', 'PARENTAL_LEAVE', 'Need some time of to help my son with homework');
 INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (4, 6, 'DENIED', 'This is not a valid reason for parental leave...');
 
-*/
+
+ */
