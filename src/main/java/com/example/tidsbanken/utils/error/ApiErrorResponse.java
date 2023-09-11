@@ -1,4 +1,4 @@
-package com.example.tidsbanken.error;
+package com.example.tidsbanken.utils.error;
 
 import lombok.Data;
 

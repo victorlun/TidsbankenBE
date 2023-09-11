@@ -1,20 +1,11 @@
 package com.example.tidsbanken.controllers;
 
-import com.example.tidsbanken.error.ApiErrorResponse;
-import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import com.example.tidsbanken.mappers.BlockedPeriodMapper;
-import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
 import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodPostDTO;
 import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodUpdateDTO;
-import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.model.entities.Employee;
-import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
 import com.example.tidsbanken.services.employee.EmployeeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
