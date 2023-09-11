@@ -1,7 +1,13 @@
 package com.example.tidsbanken.controllers;
 
+import com.example.tidsbanken.error.ApiErrorResponse;
+import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +25,7 @@ public class BlockedPeriodController {
     public BlockedPeriodController(BlockedPeriodService blockedPeriodService) {
         this.blockedPeriodService = blockedPeriodService;
     }
+
     @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<?> getBlockedPeriodById(@PathVariable Long id) {
@@ -49,7 +56,6 @@ public class BlockedPeriodController {
         BlockedPeriod existingBlockedPeriod = blockedPeriodService.findById(id);
         if (existingBlockedPeriod != null) {
             if (updatedBlockedPeriod == null || updatedBlockedPeriod.getEmployee() == null) {
-                // Return a more detailed error message and use HttpStatus.BAD_REQUEST
                 return new ResponseEntity<>("Invalid input. BlockedPeriod or Employee is null.", HttpStatus.BAD_REQUEST);
             }
             existingBlockedPeriod.setEmployee(updatedBlockedPeriod.getEmployee());
@@ -57,7 +63,6 @@ public class BlockedPeriodController {
             blockedPeriodService.update(existingBlockedPeriod);
             return ResponseEntity.noContent().build();
         } else {
-            // Return a more detailed error message and use HttpStatus.NOT_FOUND
             return new ResponseEntity<>("BlockedPeriod with ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }
     }

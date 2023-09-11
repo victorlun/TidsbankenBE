@@ -14,13 +14,15 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class EmployeeMapper {
 
-    @Mapping(target = "managerId", source = "manager.employeeId")
-    @Mapping(target = "subordinates", source = "subordinates")
+   // @Mapping(target = "managerId", source = "manager.employeeId")
+    //@Mapping(target = "subordinates", source = "subordinates")
+    @Mapping(target = "managerName", source = "manager.firstName")
     public abstract EmployeeDTO employeeToEmployeeDTO(Employee employee);
 
-    @Mapping(target = "manager.employeeId", source = "managerId")
-    @Mapping(target = "subordinates", source = "subordinates")
+    @Mapping(target = "manager.employeeId", source = "managerName")
+    //@Mapping(target = "subordinates", source = "subordinates")
     public abstract Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
+
 
     @Named("mapSubordinatesToIds")
     public Set<Long> mapSubordinatesToIds(Set<Employee> source) {

@@ -27,7 +27,6 @@ public class EmployeePostDTO {
     @Schema(description = "Email of the employee", example = "john.doe@gmail.com")
     private String email;
 
-
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
     private String role;
 

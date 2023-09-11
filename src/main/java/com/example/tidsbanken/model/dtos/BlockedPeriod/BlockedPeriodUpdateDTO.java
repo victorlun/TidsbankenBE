@@ -17,7 +17,6 @@ public class BlockedPeriodUpdateDTO {
     @Schema(description = "End date of a blocked period")
     private LocalDate endDate;
 
-
     @Schema(description = "ID of the associated period")
     private Long periodId;
 
