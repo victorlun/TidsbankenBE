@@ -62,4 +62,16 @@ public class VacationRequestServiceImpl implements VacationRequestService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<VacationRequest> findAllApprovedOrPending() {
+        return vacationRequestRepository.findAll()
+                .stream()
+
+                .filter(vacationRequest -> {
+                    VacationResponse response = vacationRequest.getVacationResponse();
+                    return response == null || Response.APPROVED.equals(response.getResponse());
+                })
+                .collect(Collectors.toList());
+    }
+
 }

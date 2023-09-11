@@ -9,4 +9,6 @@ public interface VacationRequestService extends CrudService<VacationRequest, Lon
     List<VacationRequest> findByEmployeeId(Long employeeId);
 
     List<VacationRequest> findByEmployeeIdApprovedOrPending(Long employeeId);
+
+    List<VacationRequest> findAllApprovedOrPending();
 }
