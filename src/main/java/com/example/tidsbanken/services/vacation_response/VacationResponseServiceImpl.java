@@ -36,6 +36,5 @@ public class VacationResponseServiceImpl implements VacationResponseService {
     @Override
     public void deleteById(Long id) {
         vacationResponseRepository.deleteById(id);
-
     }
 }
