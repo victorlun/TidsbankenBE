@@ -17,17 +17,15 @@ public class BlockedPeriod {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long blockedPeriodId; // New ID
 
-
         @Column(name = "start_date")
         private LocalDate startDate;
 
         @Column(name = "end_date")
         private LocalDate endDate;
 
-        @OneToOne
-        @JoinColumn(name = "employee_id")
-        private Employee employee;
-
+       @ManyToOne
+       @JoinColumn(name = "employee_id_bp")
+       private Employee employee;
     /*
      * Default constructor
      */

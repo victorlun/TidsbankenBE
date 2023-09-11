@@ -1,6 +1,7 @@
 package com.example.tidsbanken.mappers;
 
 import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
+import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodPostDTO;
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,6 +17,8 @@ public abstract class BlockedPeriodMapper {
 
     public abstract List<BlockedPeriodDTO> blockedPeriodToBlockedPeriodDtoList(List<BlockedPeriod> blockedPeriods);
 
+    @Mapping(source = "employeeId", target = "employee.employeeId")
+    public abstract BlockedPeriod blockedPeriodPostDTOToBlockedPeriod(BlockedPeriodPostDTO blockedPeriodPostDTO);
   //  @Named("mapPeriodId")
   //  protected Long mapPeriodId(Period period) {
   //      return period != null ? period.getPeriodId() : null;
