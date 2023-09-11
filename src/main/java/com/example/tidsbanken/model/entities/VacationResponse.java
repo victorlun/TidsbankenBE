@@ -1,7 +1,6 @@
 package com.example.tidsbanken.model.entities;
 
 import com.example.tidsbanken.enumerator.Response;
-import com.example.tidsbanken.model.entities.VacationRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +17,6 @@ public class VacationResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long vacationResponseId;
 
-    @Getter
     @OneToOne
     @JoinColumn(name = "vacation_request_id")
     private VacationRequest vacationRequest;

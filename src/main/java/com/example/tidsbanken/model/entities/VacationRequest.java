@@ -20,6 +20,9 @@ public class VacationRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vacationRequestId;
 
+    @OneToOne(mappedBy = "vacationRequest", cascade = CascadeType.ALL)
+    private VacationResponse vacationResponse;
+
     @Column(name = "start_date")
     private LocalDate startDate;
 

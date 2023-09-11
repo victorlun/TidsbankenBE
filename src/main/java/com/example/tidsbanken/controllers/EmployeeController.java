@@ -2,6 +2,7 @@ package com.example.tidsbanken.controllers;
 
 import com.example.tidsbanken.mappers.EmployeeMapper;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeDTO;
+import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
 import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.services.employee.EmployeeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/employees")
@@ -104,6 +106,15 @@ public class EmployeeController {
     }
 
 
-}
+    @GetMapping("/manager/{id}/unhandled")
+    public ResponseEntity<List<EmployeeWithRequestsDTO>> getUnhandledRequestsUnderManager(@PathVariable Long id) {
+        List<EmployeeWithRequestsDTO> employeeWithRequests = employeeService.getUnhandledRequestsUnderManager(id);
+        if (employeeWithRequests == null || employeeWithRequests.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(employeeWithRequests, HttpStatus.OK);
+        }
 
 
+
+    }

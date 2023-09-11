@@ -10,6 +10,10 @@ import org.mapstruct.Mappings;
 public abstract class VacationRequestMapper {
     @Mappings({
             @Mapping(source = "employee.employeeId", target = "employeeId"),
+            @Mapping(source = "vacationResponse.response", target = "vacationResponse"),
+            @Mapping(source = "vacationResponse.vacationResponseId", target = "vacationResponseId"),
+            @Mapping(source = "employee.firstName", target = "firstName"),
+            @Mapping(source = "employee.lastName", target = "lastName"),
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
 }
