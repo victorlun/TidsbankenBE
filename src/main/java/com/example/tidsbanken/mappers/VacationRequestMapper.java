@@ -1,5 +1,6 @@
 package com.example.tidsbanken.mappers;
 
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestPostDTO;
 import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import org.mapstruct.Mapper;
@@ -16,4 +17,11 @@ public abstract class VacationRequestMapper {
             @Mapping(source = "employee.lastName", target = "lastName"),
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
+
+    @Mappings({
+            @Mapping(source = "startDate", target ="startDate"),
+            @Mapping(source = "endDate", target ="endDate"),
+            @Mapping(source = "employeeId", target = "employee.employeeId")
+    })
+    public abstract VacationRequest vacationRequestPostDTOToVacationRequest(VacationRequestPostDTO dto);
 }

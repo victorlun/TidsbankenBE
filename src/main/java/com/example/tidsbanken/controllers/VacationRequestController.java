@@ -1,7 +1,10 @@
 package com.example.tidsbanken.controllers;
 import com.example.tidsbanken.mappers.VacationRequestMapper;
+import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestPostDTO;
+import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
+import com.example.tidsbanken.services.employee.EmployeeService;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,12 @@ import java.util.List;
 public class VacationRequestController {
     private final VacationRequestService vacationRequestService;
     private final VacationRequestMapper vacationRequestMapper;
+    private final EmployeeService employeeService;
     @Autowired
-    public VacationRequestController(VacationRequestService vacationRequestService, VacationRequestMapper vacationRequestMapper) {
+    public VacationRequestController(VacationRequestService vacationRequestService, VacationRequestMapper vacationRequestMapper, EmployeeService employeeService) {
         this.vacationRequestService = vacationRequestService;
         this.vacationRequestMapper = vacationRequestMapper;
+        this.employeeService = employeeService;
     }
     @GetMapping
     public ResponseEntity<List<VacationRequestDTO>> getAll(){
@@ -52,7 +57,8 @@ public class VacationRequestController {
         return new ResponseEntity<>(vacationRequest, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<VacationRequest> createVacationRequest(@RequestBody VacationRequest vacationRequest){
+    public ResponseEntity<VacationRequest> createVacationRequest(@RequestBody VacationRequestPostDTO dto){
+        VacationRequest vacationRequest = vacationRequestMapper.vacationRequestPostDTOToVacationRequest(dto);
         try {
             vacationRequestService.add(vacationRequest);
             return new ResponseEntity<>(vacationRequest, HttpStatus.CREATED);
@@ -60,18 +66,19 @@ public class VacationRequestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PutMapping
-    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long id, @RequestBody VacationRequest newVacationRequest){
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long id, @RequestBody VacationRequestPostDTO newRequest){
         VacationRequest oldVacationRequest = vacationRequestService.findById(id);
-        if(oldVacationRequest == null){
+        Employee employee = employeeService.findById(newRequest.getEmployeeId());
+        if(oldVacationRequest == null || employee == null){
             return ResponseEntity.notFound().build();
         }
-        oldVacationRequest.setVacationRequestId(newVacationRequest.getVacationRequestId());
-        oldVacationRequest.setVacationType(newVacationRequest.getVacationType());
-        oldVacationRequest.setEmployee(newVacationRequest.getEmployee());
-        oldVacationRequest.setStartDate(newVacationRequest.getStartDate());
-        oldVacationRequest.setEndDate(newVacationRequest.getEndDate());
-        oldVacationRequest.setNotes(newVacationRequest.getNotes());
+
+        oldVacationRequest.setVacationType(newRequest.getVacationType());
+        oldVacationRequest.setEmployee(employee);
+        oldVacationRequest.setStartDate(newRequest.getStartDate());
+        oldVacationRequest.setEndDate(newRequest.getEndDate());
+        oldVacationRequest.setNotes(newRequest.getNotes());
 
         vacationRequestService.update(oldVacationRequest);
 
