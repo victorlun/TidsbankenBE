@@ -1,6 +1,8 @@
 package com.example.tidsbanken.mappers;
 
 import com.example.tidsbanken.model.dtos.Employee.EmployeeDTO;
+import com.example.tidsbanken.model.dtos.Employee.EmployeePostDTO;
+import com.example.tidsbanken.model.dtos.Employee.EmployeeUpdateDTO;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.model.entities.Employee;
@@ -15,9 +17,18 @@ public abstract class EmployeeMapper {
 
    // @Mapping(target = "managerId", source = "manager.employeeId")
     //@Mapping(target = "subordinates", source = "subordinates")
-    @Mapping(target = "managerName", source = "manager.firstName")
     public abstract EmployeeDTO employeeToEmployeeDTO(Employee employee);
+    @Mapping(target = "manager.employeeId", source = "manager")
+    public abstract  Employee employeePostDTOToEmployee(EmployeePostDTO employeePostDTO);
 
+    @AfterMapping
+    protected void mapManager(EmployeePostDTO dto, @MappingTarget Employee entity) {
+        if (dto.getManager() != null) {
+            Employee manager = new Employee();
+            manager.setEmployeeId(dto.getManager());
+        entity.setManager(manager);
+        }
+    }
     @Mapping(target = "manager.employeeId", source = "managerName")
     //@Mapping(target = "subordinates", source = "subordinates")
     public abstract Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
@@ -64,5 +75,6 @@ public abstract class EmployeeMapper {
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
 
+    public abstract Employee employeeUpdateDtoToEmployee(EmployeeUpdateDTO employeeUpdateDTO);
 
 }

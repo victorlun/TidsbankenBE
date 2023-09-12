@@ -14,10 +14,7 @@ import java.util.Set;
 @Setter
 public class EmployeePostDTO {
     @Schema(description = "Manager of the employee")
-    private Employee manager;
-
-    @Schema(description = "Employees managed by this manager")
-    private Set<Employee> subordinates = new HashSet<>();
+    private Long manager;
 
     @Schema(description = "First name of the employee", example = "John")
     private String firstName;
@@ -30,7 +27,7 @@ public class EmployeePostDTO {
     @Schema(description = "The work role of the employee.", example = "Junior Java Developer")
     private String role;
 
-    @Schema(description = "The authorization role of the employee", example = "AuthRole.MANAGER")
+    @Schema(description = "The authorization role of the employee", example = "MANAGER")
     private AuthRole authRole;
 
 
