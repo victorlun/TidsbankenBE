@@ -55,8 +55,9 @@ public class EmployeeController {
    @PostMapping
    @CrossOrigin
    public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
-       Employee employee = employeeService.add(
-               employeeMapper.employeePostDTOToEmployee(employeeDto));
+        Employee manager = employeeService.findById(employeeDto.getManager());
+        Employee employee = employeeService.add(
+               employeeMapper.employeePostDTOToEmployee(employeeDto, manager));
        URI location = URI.create("/api/v1/employees" +employee.getEmployeeId());
        return ResponseEntity.created(location).build();
    }

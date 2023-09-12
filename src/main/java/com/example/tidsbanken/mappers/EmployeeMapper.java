@@ -18,17 +18,17 @@ public abstract class EmployeeMapper {
    // @Mapping(target = "managerId", source = "manager.employeeId")
     //@Mapping(target = "subordinates", source = "subordinates")
     public abstract EmployeeDTO employeeToEmployeeDTO(Employee employee);
-    @Mapping(target = "manager.employeeId", source = "manager")
-    public abstract  Employee employeePostDTOToEmployee(EmployeePostDTO employeePostDTO);
+    @Mapping(target = "firstName", source = "employeePostDTO.firstName")
+    @Mapping(target = "lastName", source = "employeePostDTO.lastName")
+    @Mapping(target = "email", source = "employeePostDTO.email")
+    @Mapping(target = "role", source = "employeePostDTO.role")
+    @Mapping(target = "authRole", source = "employeePostDTO.authRole")
+    @Mapping(target = "manager", source = "manager")
+    @Mapping(target = "employeeId", ignore = true)
+    public abstract Employee employeePostDTOToEmployee(EmployeePostDTO employeePostDTO, Employee manager);
 
-    @AfterMapping
-    protected void mapManager(EmployeePostDTO dto, @MappingTarget Employee entity) {
-        if (dto.getManager() != null) {
-            Employee manager = new Employee();
-            manager.setEmployeeId(dto.getManager());
-        entity.setManager(manager);
-        }
-    }
+
+
     @Mapping(target = "manager.employeeId", source = "managerName")
     //@Mapping(target = "subordinates", source = "subordinates")
     public abstract Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);

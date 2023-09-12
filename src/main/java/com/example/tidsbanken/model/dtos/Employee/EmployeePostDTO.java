@@ -1,11 +1,9 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
 import com.example.tidsbanken.utils.enumerators.AuthRole;
-import com.example.tidsbanken.model.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import java.util.HashSet;
-import java.util.Set;
+
 @Data
 public class EmployeePostDTO {
     @Schema(description = "Manager of the employee")
