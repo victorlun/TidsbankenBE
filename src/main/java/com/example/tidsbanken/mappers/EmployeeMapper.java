@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class EmployeeMapper {
 
-   // @Mapping(target = "managerId", source = "manager.employeeId")
-    //@Mapping(target = "subordinates", source = "subordinates")
+    @Mapping(target = "managerId", source = "manager.employeeId")
     public abstract EmployeeDTO employeeToEmployeeDTO(Employee employee);
+    
     @Mapping(target = "firstName", source = "employeePostDTO.firstName")
     @Mapping(target = "lastName", source = "employeePostDTO.lastName")
     @Mapping(target = "email", source = "employeePostDTO.email")
@@ -29,10 +29,8 @@ public abstract class EmployeeMapper {
 
 
 
-    @Mapping(target = "manager.employeeId", source = "managerName")
-    //@Mapping(target = "subordinates", source = "subordinates")
+    @Mapping(target = "manager.employeeId", source = "managerId")
     public abstract Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
-
 
     @Named("mapSubordinatesToIds")
     public Set<Long> mapSubordinatesToIds(Set<Employee> source) {
@@ -42,7 +40,6 @@ public abstract class EmployeeMapper {
                 .map(Employee::getEmployeeId)
                 .collect(Collectors.toSet());
     }
-
     @Named("mapSubordinatesToEmployees")
     public Set<Employee> mapSubordinatesToEmployees(Set<Long> source) {
         if (source == null)
@@ -64,8 +61,6 @@ public abstract class EmployeeMapper {
             dto.setManagerName(employee.getManager().getFirstName() + " " + employee.getManager().getLastName());
         }
     }
-
-
     @Mappings({
             @Mapping(source = "employee.employeeId", target = "employeeId"),
             @Mapping(source = "vacationResponse.response", target = "vacationResponse"),
