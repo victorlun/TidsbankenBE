@@ -1,6 +1,6 @@
 package com.example.tidsbanken.configs;
-
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,23 +13,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimNames;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.stereotype.Component;
 
-/*
- * Convert a JSON Web Token (JWT) into an authentication token that can be used for
- * authentication and authorization within a Spring-based application.
- *
- * A bridge between the JWT-based authentication system and the Spring Security framework.
- * Extracts relevant user roles and resource-specific roles from the JWT and constructs an
- * authentication token that can be utilized by Spring Security to make informed decisions
- * about authentication and authorization for the user.
- */
+import static java.util.Collections.emptyMap;
+
 @Component
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
-  //  @Value("${keycloak.client-id}")
     private String clientId;
 
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
@@ -37,8 +30,15 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
         Collection<GrantedAuthority> authorities = Stream.concat(
-                jwtGrantedAuthoritiesConverter.convert(jwt).stream(),
-                extractResourceRoles(jwt).stream()).collect(Collectors.toSet());
+                        jwtGrantedAuthoritiesConverter.convert(jwt).stream(),
+                        extractResourceRoles(jwt, "tidsbanken-app").stream())
+                .collect(Collectors.toSet());
+
+        Set<String> extractedRoles = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
+
+        System.out.println("Roles for tidsbanken-app: " + extractedRoles);
 
         return new JwtAuthenticationToken(
                 jwt,
@@ -47,26 +47,19 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     }
 
     @SuppressWarnings("unchecked")
-    private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
-        Map<String, Object> resourceAccess;
-        Map<String, Object> resource;
-        Collection<String> resourceRoles;
-        if (jwt.getClaim("resource_access") == null) {
+    private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt, String resourceName) {
+        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
+
+        if (resourceAccess == null || !resourceAccess.containsKey(resourceName)) {
             return Set.of();
         }
-        resourceAccess = jwt.getClaim("resource_access");
 
-        if (resourceAccess.get(clientId) == null) {
-            return Set.of();
-        }
-        resource = (Map<String, Object>) resourceAccess.get(clientId);
+        Map<String, Object> resource = (Map<String, Object>) resourceAccess.get(resourceName);
+        Collection<String> resourceRoles = (Collection<String>) resource.get("roles");
 
-        resourceRoles = (Collection<String>) resource.get("roles");
         return resourceRoles
                 .stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toSet());
     }
 }
-
-

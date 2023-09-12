@@ -61,7 +61,6 @@ public class EmployeeController {
        return ResponseEntity.created(location).build();
    }
 
-
    @CrossOrigin
    //@PreAuthorize("hasAnyRole('user', 'admin')")
    @PutMapping("/{id}")
