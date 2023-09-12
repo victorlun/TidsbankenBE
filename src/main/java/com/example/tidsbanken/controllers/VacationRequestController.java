@@ -53,9 +53,10 @@ public class VacationRequestController {
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
     @GetMapping("{id}")
-    public ResponseEntity<VacationRequest> getById(@PathVariable Long id){
+    public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long id){
         VacationRequest vacationRequest = vacationRequestService.findById(id);
-        return new ResponseEntity<>(vacationRequest, HttpStatus.OK);
+        VacationRequestDTO dto = vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/vacation_types")
