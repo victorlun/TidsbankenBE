@@ -1,12 +1,10 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
-@Getter
-@Setter
+@Data
 public class EmployeeWithRequestsDTO {
     private Long employeeId;
     private Long managerId;
