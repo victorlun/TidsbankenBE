@@ -1,5 +1,6 @@
 package com.example.tidsbanken.controllers;
 
+import com.example.tidsbanken.model.dtos.BlockedPeriod.BlockedPeriodDTO;
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.services.blocked_period.BlockedPeriodService;
 import com.example.tidsbanken.mappers.BlockedPeriodMapper;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 @RestController
 @RequestMapping("/api/v1/blocked-periods")
@@ -33,17 +35,25 @@ public class BlockedPeriodController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getBlockedPeriodById(@PathVariable Long id) {
         BlockedPeriod blockedPeriod = blockedPeriodService.findById(id);
+        BlockedPeriodDTO dto = blockedPeriodMapper.blockedPeriodToBlockedPeriodDto(blockedPeriod);
         if (blockedPeriod != null) {
-            return new ResponseEntity<>(blockedPeriod, HttpStatus.OK);
+            return new ResponseEntity<>(dto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("BlockedPeriod with ID " + id + " not found.",HttpStatus.NOT_FOUND);
         }
     }
     @CrossOrigin
     @GetMapping
-    public ResponseEntity<Collection<BlockedPeriod>> getAllBlockedPeriods() {
+    public ResponseEntity<Collection<BlockedPeriodDTO>> getAllBlockedPeriods() {
         Collection<BlockedPeriod> blockedPeriods = blockedPeriodService.findAll();
-        return new ResponseEntity<>(blockedPeriods, HttpStatus.OK);
+        Collection<BlockedPeriodDTO> dtos = new ArrayList<>();
+
+        for(BlockedPeriod blockedPeriod : blockedPeriods){
+            dtos.add(blockedPeriodMapper.blockedPeriodToBlockedPeriodDto(blockedPeriod));
+        }
+
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
     @CrossOrigin
     @PostMapping
