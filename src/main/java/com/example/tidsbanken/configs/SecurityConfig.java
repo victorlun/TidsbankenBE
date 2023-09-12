@@ -6,17 +6,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import lombok.RequiredArgsConstructor;
-
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthConverter jwtAuthConverter;
 
+    public SecurityConfig(JwtAuthConverter jwtAuthConverter) {
+        this.jwtAuthConverter = jwtAuthConverter;
+    }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
                 .cors(cors -> cors.disable())
                 .csrf(csrf -> csrf.disable());
@@ -26,8 +30,9 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((authz) -> authz
-                        // Allow unauthenticated access to the specified path.
                         .requestMatchers("/api/v1/resources/public").permitAll()
+                        .requestMatchers("/api/v1/resources/restricted").hasAnyRole("ADMIN","USER")
+                       .requestMatchers("/api/v1/resources/admin").hasRole("ADMIN")
                         .requestMatchers("/api/v1/request/**").permitAll()
                         .requestMatchers("/api/v1/response/**").permitAll()
                         .requestMatchers("/api/v1/blocked-periods/**").permitAll()
@@ -35,10 +40,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/resources/public", "/swagger-ui.html", "/swagger-ui/**", "/v1/api-docs", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2
-                        // Configure JWT-based authentication and sets a custom JWT authentication converter.
                         .jwt(jwt -> jwt
                                 .jwtAuthenticationConverter(jwtAuthConverter)));
-
         return http.build();
     }
 }
