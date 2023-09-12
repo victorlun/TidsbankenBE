@@ -4,15 +4,9 @@ import com.example.tidsbanken.utils.enumerators.VacationStatus;
 import com.example.tidsbanken.utils.enumerators.VacationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 
 @Data
-@Getter
-@Setter
 public class VacationRequestPostDTO {
 
     @Schema(description = "Start date of the request", example = "2023-09-11")

@@ -1,17 +1,10 @@
 package com.example.tidsbanken.model.dtos.Employee;
 
 import com.example.tidsbanken.utils.enumerators.AuthRole;
-import com.example.tidsbanken.model.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
 @Data
-@Getter
-@Setter
 public class EmployeePostDTO {
     @Schema(description = "Manager of the employee")
     private Long manager;

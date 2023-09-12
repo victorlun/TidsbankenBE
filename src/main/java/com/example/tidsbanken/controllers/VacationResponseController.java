@@ -1,12 +1,12 @@
 package com.example.tidsbanken.controllers;
 
 import com.example.tidsbanken.model.entities.VacationResponse;
-import com.example.tidsbanken.services.vacation_request.VacationRequestService;
 import com.example.tidsbanken.services.vacation_response.VacationResponseService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
 public class VacationResponseController {
 
     private final VacationResponseService vacationResponseService;
-    private final VacationRequestService vacationRequestService;
+
 
     @Autowired
-    public VacationResponseController(VacationResponseService vacationResponseService, VacationRequestService vacationRequestService) {
+    public VacationResponseController(VacationResponseService vacationResponseService) {
         this.vacationResponseService = vacationResponseService;
-        this.vacationRequestService = vacationRequestService;
+
     }
 
     @GetMapping
@@ -61,10 +61,14 @@ public class VacationResponseController {
 
         return ResponseEntity.noContent().build();
     }
-
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteResponse(@PathVariable Long id) {
-        vacationResponseService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        try {
+            vacationResponseService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            // Log the exception and return an error response
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

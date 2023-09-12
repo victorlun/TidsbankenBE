@@ -69,6 +69,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return filterEmployeesAndRequests(allEmployees);
     }
 
+    @Override
+    public void deleteManagerReference(Employee employee) {
+        employee.setManager(null);
+    }
+
     public List<EmployeeWithRequestsDTO> filterEmployeesAndRequests(List<EmployeeWithRequestsDTO> allEmployees) {
         return allEmployees.stream()
                 .filter(employee -> employee.getRequests() != null && !employee.getRequests().isEmpty())  // filter out employees with empty or null requests

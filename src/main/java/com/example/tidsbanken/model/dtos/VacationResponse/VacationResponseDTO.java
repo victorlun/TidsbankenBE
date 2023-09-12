@@ -3,12 +3,8 @@ package com.example.tidsbanken.model.dtos.VacationResponse;
 import com.example.tidsbanken.utils.enumerators.Response;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 public class VacationResponseDTO {
     @Schema(description = "ID of a vacation response", example = "123")
     private Long vacationResponseId;
