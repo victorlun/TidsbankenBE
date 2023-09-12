@@ -6,6 +6,7 @@ import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.model.dtos.VacationRequest.VacationRequestDTO;
 import com.example.tidsbanken.services.employee.EmployeeService;
 import com.example.tidsbanken.services.vacation_request.VacationRequestService;
+import com.example.tidsbanken.utils.enumerators.VacationType;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,17 @@ public class VacationRequestController {
     public ResponseEntity<VacationRequest> getById(@PathVariable Long id){
         VacationRequest vacationRequest = vacationRequestService.findById(id);
         return new ResponseEntity<>(vacationRequest, HttpStatus.OK);
+    }
+
+    @GetMapping("/vacation_types")
+    public ResponseEntity<List<VacationType>> getVacationTypes(){
+        List<VacationType> types = new ArrayList<>();
+        types.add(VacationType.VACATION_LEAVE);
+        types.add(VacationType.PARENTAL_LEAVE);
+        types.add(VacationType.SICK_LEAVE);
+        types.add(VacationType.PUBLIC_HOLIDAY);
+
+        return new ResponseEntity<>(types, HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<VacationRequest> createVacationRequest(@RequestBody VacationRequestPostDTO dto){
