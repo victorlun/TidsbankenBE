@@ -25,8 +25,8 @@ public class BlockedPeriod {
         @Schema(description = "End date of the blocked period", example = "2023-09-15")
         private LocalDate endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+        @ManyToOne
+        @JoinColumn(name = "employee_id", nullable = false)
+        private Employee employee;
 
 }
