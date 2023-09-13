@@ -20,13 +20,6 @@ public abstract class BlockedPeriodMapper {
 
     @Mapping(source = "managerId", target = "employee.employeeId")
     public abstract BlockedPeriod blockedPeriodPostDTOToBlockedPeriod(BlockedPeriodPostDTO blockedPeriodPostDTO);
-  //  @Named("mapPeriodId")
-  //  protected Long mapPeriodId(Period period) {
-  //      return period != null ? period.getPeriodId() : null;
-  //  }
-  //  protected Set<Long> mapPeriodIds(Set<Period> source) {
-  //      if (source == null) return null;
-  //      return source.stream().map(this::mapPeriodId).collect(Collectors.toSet());
-  //  }
+
 
 }
