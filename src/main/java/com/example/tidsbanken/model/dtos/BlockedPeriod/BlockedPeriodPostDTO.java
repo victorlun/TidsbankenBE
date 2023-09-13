@@ -10,5 +10,5 @@ public class BlockedPeriodPostDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     @Schema(description = "ID of the associated employee")
-    private Long employeeId;
+    private Long managerId;
 }

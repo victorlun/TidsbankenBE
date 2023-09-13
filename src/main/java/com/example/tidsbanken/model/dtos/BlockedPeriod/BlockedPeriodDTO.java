@@ -13,6 +13,6 @@ public class BlockedPeriodDTO {
 
     private LocalDate endDate;
 
-    private Employee employee;
+    //private Employee employee;
 
 }

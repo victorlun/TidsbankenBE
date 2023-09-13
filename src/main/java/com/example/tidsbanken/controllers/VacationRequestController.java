@@ -66,6 +66,7 @@ public class VacationRequestController {
         types.add(VacationType.PARENTAL_LEAVE);
         types.add(VacationType.SICK_LEAVE);
         types.add(VacationType.PUBLIC_HOLIDAY);
+        types.add(VacationType.OTHER);
 
         return new ResponseEntity<>(types, HttpStatus.OK);
     }
