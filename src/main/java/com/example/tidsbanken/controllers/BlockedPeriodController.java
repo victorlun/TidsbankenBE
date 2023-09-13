@@ -58,7 +58,7 @@ public class BlockedPeriodController {
     @CrossOrigin
     @PostMapping
     public ResponseEntity<?> createBlockedPeriod(@RequestBody BlockedPeriodPostDTO dto) {
-        if (dto == null || employeeService.findById(dto.getEmployeeId()) == null) {
+        if (dto == null || employeeService.findById(dto.getManagerId()) == null) {
             return new ResponseEntity<>("Invalid input. BlockedPeriod or Employee is null.", HttpStatus.BAD_REQUEST);
         }
         BlockedPeriod blockedPeriod  = blockedPeriodMapper.blockedPeriodPostDTOToBlockedPeriod(dto);
@@ -69,11 +69,11 @@ public class BlockedPeriodController {
     public ResponseEntity<?> updateBlockedPeriod(@PathVariable Long id, @RequestBody BlockedPeriodUpdateDTO updatedBlockedPeriod) {
         BlockedPeriod existingBlockedPeriod = blockedPeriodService.findById(id);
         if (existingBlockedPeriod != null) {
-            if (updatedBlockedPeriod == null || employeeService.findById(updatedBlockedPeriod.getEmployeeId()) == null) {
+            if (updatedBlockedPeriod == null || employeeService.findById(updatedBlockedPeriod.getManagerId()) == null) {
                 // Return a more detailed error message and use HttpStatus.BAD_REQUEST
                 return new ResponseEntity<>("Invalid input. BlockedPeriod or Employee is null.", HttpStatus.BAD_REQUEST);
             }
-            Employee employee = employeeService.findById(updatedBlockedPeriod.getEmployeeId());
+            Employee employee = employeeService.findById(updatedBlockedPeriod.getManagerId());
 
             existingBlockedPeriod.setEmployee(employee);
             existingBlockedPeriod.setStartDate(updatedBlockedPeriod.getStartDate());
