@@ -50,28 +50,5 @@ public class VacationRequestServiceImpl implements VacationRequestService{
                 .filter(vacationRequest -> vacationRequest.getEmployee().getEmployeeId()==(employeeId))
                 .collect(Collectors.toList());
     }
-    @Override
-    public List<VacationRequest> findByEmployeeIdApprovedOrPending(Long employeeId) {
-        return vacationRequestRepository.findAll()
-                .stream()
-                .filter(vacationRequest -> vacationRequest.getEmployee().getEmployeeId()==(employeeId))
-                .filter(vacationRequest -> {
-                    VacationResponse response = vacationRequest.getVacationResponse();
-                    return response == null || Response.APPROVED.equals(response.getResponse());
-                })
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<VacationRequest> findAllApprovedOrPending() {
-        return vacationRequestRepository.findAll()
-                .stream()
-
-                .filter(vacationRequest -> {
-                    VacationResponse response = vacationRequest.getVacationResponse();
-                    return response == null || Response.APPROVED.equals(response.getResponse());
-                })
-                .collect(Collectors.toList());
-    }
 
 }

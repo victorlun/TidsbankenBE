@@ -41,17 +41,6 @@ public class VacationRequestController {
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("/approved_or_pending")
-    public ResponseEntity<List<VacationRequestDTO>> getAllApprovedOrPending() {
-        List<VacationRequest> vacationRequests = vacationRequestService.findAllApprovedOrPending();
-        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
-
-        for (VacationRequest vacationRequest : vacationRequests) {
-            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
-        }
-
-        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
-    }
     @GetMapping("{id}")
     public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long id){
         VacationRequest vacationRequest = vacationRequestService.findById(id);
@@ -59,17 +48,7 @@ public class VacationRequestController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping("/vacation_types")
-    public ResponseEntity<List<VacationType>> getVacationTypes(){
-        List<VacationType> types = new ArrayList<>();
-        types.add(VacationType.VACATION_LEAVE);
-        types.add(VacationType.PARENTAL_LEAVE);
-        types.add(VacationType.SICK_LEAVE);
-        types.add(VacationType.PUBLIC_HOLIDAY);
-        types.add(VacationType.OTHER);
 
-        return new ResponseEntity<>(types, HttpStatus.OK);
-    }
     @PostMapping
     public ResponseEntity<VacationRequest> createVacationRequest(@RequestBody VacationRequestPostDTO dto){
         VacationRequest vacationRequest = vacationRequestMapper.vacationRequestPostDTOToVacationRequest(dto);
@@ -108,17 +87,6 @@ public class VacationRequestController {
     @GetMapping("/employee/{id}")
     public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long id) {
         List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(id);
-        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
-
-        for (VacationRequest vacationRequest : vacationRequests) {
-            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
-        }
-
-        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
-    }
-    @GetMapping("/employee/{id}/approved_or_pending")
-    public ResponseEntity<List<VacationRequestDTO>> getByEmployeeApprovedOrPending(@PathVariable Long id) {
-        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeIdApprovedOrPending(id);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
 
         for (VacationRequest vacationRequest : vacationRequests) {
