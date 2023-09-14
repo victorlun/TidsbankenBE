@@ -34,10 +34,6 @@ public class VacationRequest {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    @Schema(description = "The status of the vacation request.", example = "VacationStatus.PENDING")
-    private VacationStatus vacationStatus;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "vacation_type")
@@ -51,9 +47,8 @@ public class VacationRequest {
 
     public VacationRequest() {}
 
-    public VacationRequest(Employee employee, VacationStatus vacationStatus, VacationType vacationType, String notes) {
+    public VacationRequest(Employee employee, VacationType vacationType, String notes) {
       this.employee = employee;
-      this.vacationStatus = vacationStatus;
       this.vacationType = vacationType;
       this.notes = notes;
 }

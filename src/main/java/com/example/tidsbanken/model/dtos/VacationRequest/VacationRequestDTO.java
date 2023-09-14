@@ -25,8 +25,7 @@ public class VacationRequestDTO {
 
     private String lastName;
 
-    @Schema(description = "The status of the vacation request.", example = "VacationStatus.PENDING")
-    private VacationStatus vacationStatus;
+
 
     @Schema(description = "The specified type for the vacation requested.", example = "VacationType.PARENTAL_LEAVE")
     private VacationType vacationType;
@@ -34,7 +33,7 @@ public class VacationRequestDTO {
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarten.")
     private String notes;
 
-    private String vacationResponse;
+    private String vacationResponseStatus;
 
     private Long vacationResponseId;
 
