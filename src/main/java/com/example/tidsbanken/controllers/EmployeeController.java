@@ -7,6 +7,13 @@ import com.example.tidsbanken.model.dtos.Employee.EmployeeUpdateDTO;
 import com.example.tidsbanken.model.dtos.Employee.EmployeeWithRequestsDTO;
 import com.example.tidsbanken.model.entities.Employee;
 import com.example.tidsbanken.services.employee.EmployeeService;
+import com.example.tidsbanken.utils.error.ApiErrorResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +38,14 @@ public class EmployeeController {
         this.employeeService = employeeService;
         this.employeeMapper = employeeMapper;
     }
+    @Operation(summary = "Get  a list of all Employees")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success", content = {
+                    @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = EmployeeDTO.class)))
+            }),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
     @CrossOrigin
     @GetMapping
     public ResponseEntity<Collection<EmployeeDTO>> getAllEmployees() {
@@ -41,6 +56,14 @@ public class EmployeeController {
         }
         return  new ResponseEntity<>(employeeDTOS,HttpStatus.OK);
     }
+    @Operation(summary = "Get a Employee by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
     @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
@@ -50,8 +73,14 @@ public class EmployeeController {
         } else {
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
+    @Operation(summary = "Create a new Employee")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeePostDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class)))
+    })
    @PostMapping
    @CrossOrigin
    public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
@@ -61,7 +90,12 @@ public class EmployeeController {
        URI location = URI.create("/api/v1/employees" +employee.getEmployeeId());
        return ResponseEntity.created(location).build();
    }
-
+    @Operation(summary = "Update an existing employee")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
    @CrossOrigin
    //@PreAuthorize("hasAnyRole('user', 'admin')")
    @PutMapping("/{id}")
@@ -86,7 +120,12 @@ public class EmployeeController {
 
        return ResponseEntity.noContent().build();
    }
-
+    @Operation(summary = "Delete a Employee by its ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         Employee employee = employeeService.findById(id);
