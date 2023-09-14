@@ -79,7 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .filter(employee -> employee.getRequests() != null && !employee.getRequests().isEmpty())  // filter out employees with empty or null requests
                 .map(employee -> {
                     List<VacationRequestDTO> filteredRequests = employee.getRequests().stream()
-                            .filter(request -> Objects.equals(request.getVacationResponse(), null))
+                            .filter(request -> Objects.equals(request.getVacationResponseStatus(), null))
                             .collect(Collectors.toList());
                     employee.setRequests(filteredRequests);
                     return employee;

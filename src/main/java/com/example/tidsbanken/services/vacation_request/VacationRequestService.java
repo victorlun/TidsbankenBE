@@ -8,7 +8,5 @@ import java.util.List;
 public interface VacationRequestService extends CrudService<VacationRequest, Long> {
     List<VacationRequest> findByEmployeeId(Long employeeId);
 
-    List<VacationRequest> findByEmployeeIdApprovedOrPending(Long employeeId);
-
-    List<VacationRequest> findAllApprovedOrPending();
+    List<VacationRequest> findByManagerId(Long managerId);
 }

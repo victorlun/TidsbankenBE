@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/blocked-periods")
 @Tag(name ="BlockedPeriod", description = "Endpoints to interact with BlockedPeriods")
@@ -32,14 +34,14 @@ public class BlockedPeriodController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getBlockedPeriodById(@PathVariable Long id) {
-        BlockedPeriod blockedPeriod = blockedPeriodService.findById(id);
+    @GetMapping("/{blockedPeriodId}")
+    public ResponseEntity<?> getBlockedPeriodById(@PathVariable Long blockedPeriodId) {
+        BlockedPeriod blockedPeriod = blockedPeriodService.findById(blockedPeriodId);
         BlockedPeriodDTO dto = blockedPeriodMapper.blockedPeriodToBlockedPeriodDto(blockedPeriod);
         if (blockedPeriod != null) {
             return new ResponseEntity<>(dto, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("BlockedPeriod with ID " + id + " not found.",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("BlockedPeriod with ID " + blockedPeriodId + " not found.",HttpStatus.NOT_FOUND);
         }
     }
     @CrossOrigin
@@ -65,9 +67,9 @@ public class BlockedPeriodController {
         BlockedPeriod newBlockedPeriod = blockedPeriodService.add(blockedPeriod);
         return new ResponseEntity<>(newBlockedPeriod, HttpStatus.CREATED);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateBlockedPeriod(@PathVariable Long id, @RequestBody BlockedPeriodUpdateDTO updatedBlockedPeriod) {
-        BlockedPeriod existingBlockedPeriod = blockedPeriodService.findById(id);
+    @PutMapping("/{blockedPeriodId}")
+    public ResponseEntity<?> updateBlockedPeriod(@PathVariable Long blockedPeriodId, @RequestBody BlockedPeriodUpdateDTO updatedBlockedPeriod) {
+        BlockedPeriod existingBlockedPeriod = blockedPeriodService.findById(blockedPeriodId);
         if (existingBlockedPeriod != null) {
             if (updatedBlockedPeriod == null || employeeService.findById(updatedBlockedPeriod.getManagerId()) == null) {
                 // Return a more detailed error message and use HttpStatus.BAD_REQUEST
@@ -81,18 +83,28 @@ public class BlockedPeriodController {
             blockedPeriodService.update(existingBlockedPeriod);
             return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>("BlockedPeriod with ID " + id + " not found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("BlockedPeriod with ID " + blockedPeriodId + " not found.", HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBlockedPeriod(@PathVariable Long id) {
-        BlockedPeriod blockedPeriod = blockedPeriodService.findById(id);
+    @DeleteMapping("/{blockedPeriodId}")
+    public ResponseEntity<?> deleteBlockedPeriod(@PathVariable Long blockedPeriodId) {
+        BlockedPeriod blockedPeriod = blockedPeriodService.findById(blockedPeriodId);
         if (blockedPeriod != null) {
-            blockedPeriodService.deleteById(id);
+            blockedPeriodService.deleteById(blockedPeriodId);
             return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>("BlockedPeriod with ID " + id + " not found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("BlockedPeriod with ID " + blockedPeriodId + " not found.", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<List<BlockedPeriodDTO>> getByEmployee(@PathVariable Long managerId){
+        List<BlockedPeriod> blockedPeriods = blockedPeriodService.findByEmployee(managerId);
+        List<BlockedPeriodDTO> dtos = new ArrayList<>();
+        for(BlockedPeriod blockedPeriod : blockedPeriods){
+            dtos.add(blockedPeriodMapper.blockedPeriodToBlockedPeriodDto(blockedPeriod));
+        }
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 }

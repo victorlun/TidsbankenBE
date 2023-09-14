@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/request")
+@RequestMapping(path = "api/v1/requests")
 @Tag(name ="VacationRequest", description = "Endpoints to interact with VacationRequests")
 public class VacationRequestController {
     private final VacationRequestService vacationRequestService;
@@ -75,24 +75,13 @@ public class VacationRequestController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
-    @GetMapping("{id}")
-    public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long id){
-        VacationRequest vacationRequest = vacationRequestService.findById(id);
+    @GetMapping("{requestId}")
+    public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long requestId){
+        VacationRequest vacationRequest = vacationRequestService.findById(requestId);
         VacationRequestDTO dto = vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping("/vacation_types")
-    public ResponseEntity<List<VacationType>> getVacationTypes(){
-        List<VacationType> types = new ArrayList<>();
-        types.add(VacationType.VACATION_LEAVE);
-        types.add(VacationType.PARENTAL_LEAVE);
-        types.add(VacationType.SICK_LEAVE);
-        types.add(VacationType.PUBLIC_HOLIDAY);
-        types.add(VacationType.OTHER);
-
-        return new ResponseEntity<>(types, HttpStatus.OK);
-    }
     @Operation(summary = "Create a new vacation request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = {
@@ -116,9 +105,9 @@ public class VacationRequestController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
-    @PutMapping("{id}")
-    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long id, @RequestBody VacationRequestPostDTO newRequest){
-        VacationRequest oldVacationRequest = vacationRequestService.findById(id);
+    @PutMapping("{requestId}")
+    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long requestId, @RequestBody VacationRequestPostDTO newRequest){
+        VacationRequest oldVacationRequest = vacationRequestService.findById(requestId);
         Employee employee = employeeService.findById(newRequest.getEmployeeId());
         if(oldVacationRequest == null || employee == null){
             return ResponseEntity.notFound().build();
@@ -140,9 +129,9 @@ public class VacationRequestController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteVacationRequest(@PathVariable Long id){
-        vacationRequestService.deleteById(id);
+    @DeleteMapping("{requestId}")
+    public ResponseEntity<Void> deleteVacationRequest(@PathVariable Long requestId){
+        vacationRequestService.deleteById(requestId);
 
         return ResponseEntity.noContent().build();
     }
@@ -154,9 +143,9 @@ public class VacationRequestController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long id) {
-        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(id);
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long employeeId) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(employeeId);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
 
         for (VacationRequest vacationRequest : vacationRequests) {
@@ -165,9 +154,13 @@ public class VacationRequestController {
 
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
-    @GetMapping("/employee/{id}/approved_or_pending")
-    public ResponseEntity<List<VacationRequestDTO>> getByEmployeeApprovedOrPending(@PathVariable Long id) {
-        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeIdApprovedOrPending(id);
+
+
+
+
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<List<VacationRequestDTO>> getByManager(@PathVariable Long managerId) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByManagerId(managerId);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
 
         for (VacationRequest vacationRequest : vacationRequests) {
@@ -176,4 +169,5 @@ public class VacationRequestController {
 
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
+
 }
