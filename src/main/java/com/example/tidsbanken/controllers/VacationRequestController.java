@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/request")
+@RequestMapping(path = "api/v1/requests")
 @Tag(name ="VacationRequest", description = "Endpoints to interact with VacationRequests")
 public class VacationRequestController {
     private final VacationRequestService vacationRequestService;
@@ -41,9 +41,9 @@ public class VacationRequestController {
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long id){
-        VacationRequest vacationRequest = vacationRequestService.findById(id);
+    @GetMapping("{requestId}")
+    public ResponseEntity<VacationRequestDTO> getById(@PathVariable Long requestId){
+        VacationRequest vacationRequest = vacationRequestService.findById(requestId);
         VacationRequestDTO dto = vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -59,9 +59,9 @@ public class VacationRequestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PutMapping("{id}")
-    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long id, @RequestBody VacationRequestPostDTO newRequest){
-        VacationRequest oldVacationRequest = vacationRequestService.findById(id);
+    @PutMapping("{requestId}")
+    public ResponseEntity<Void> updateVacationRequest(@PathVariable Long requestId, @RequestBody VacationRequestPostDTO newRequest){
+        VacationRequest oldVacationRequest = vacationRequestService.findById(requestId);
         Employee employee = employeeService.findById(newRequest.getEmployeeId());
         if(oldVacationRequest == null || employee == null){
             return ResponseEntity.notFound().build();
@@ -78,15 +78,15 @@ public class VacationRequestController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteVacationRequest(@PathVariable Long id){
-        vacationRequestService.deleteById(id);
+    @DeleteMapping("{requestId}")
+    public ResponseEntity<Void> deleteVacationRequest(@PathVariable Long requestId){
+        vacationRequestService.deleteById(requestId);
 
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long id) {
-        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(id);
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long employeeId) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(employeeId);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
 
         for (VacationRequest vacationRequest : vacationRequests) {

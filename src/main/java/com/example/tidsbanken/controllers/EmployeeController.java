@@ -42,9 +42,9 @@ public class EmployeeController {
         return  new ResponseEntity<>(employeeDTOS,HttpStatus.OK);
     }
     @CrossOrigin
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-        Employee employee = employeeService.findById(id);
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long employeeId) {
+        Employee employee = employeeService.findById(employeeId);
         if (employee != null) {
             return new ResponseEntity<>(employee, HttpStatus.OK);
         } else {
@@ -64,15 +64,15 @@ public class EmployeeController {
 
    @CrossOrigin
    //@PreAuthorize("hasAnyRole('user', 'admin')")
-   @PutMapping("/{id}")
-   public ResponseEntity<Void> updateEmployee(@PathVariable Long id, @RequestBody EmployeeUpdateDTO employeeUpdateDTO) {
-       Employee existingEmployee = employeeService.findById(id);
+   @PutMapping("/{employeeId}")
+   public ResponseEntity<Void> updateEmployee(@PathVariable Long employeeId, @RequestBody EmployeeUpdateDTO employeeUpdateDTO) {
+       Employee existingEmployee = employeeService.findById(employeeId);
 
        if (existingEmployee == null) {
            return ResponseEntity.notFound().build();
        }
 
-       if (!id.equals(employeeUpdateDTO.getEmployeeId())) {
+       if (!employeeId.equals(employeeUpdateDTO.getEmployeeId())) {
            return ResponseEntity.badRequest().build();
        }
        existingEmployee.setFirstName(employeeUpdateDTO.getFirstName());
@@ -87,17 +87,17 @@ public class EmployeeController {
        return ResponseEntity.noContent().build();
    }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-        Employee employee = employeeService.findById(id);
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long employeeId) {
+        Employee employee = employeeService.findById(employeeId);
         employeeService.deleteManagerReference(employee);
-        employeeService.deleteById(id);
+        employeeService.deleteById(employeeId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/manager/{id}/unhandled")
-    public ResponseEntity<List<EmployeeWithRequestsDTO>> getUnhandledRequestsUnderManager(@PathVariable Long id) {
-        List<EmployeeWithRequestsDTO> employeeWithRequests = employeeService.getUnhandledRequestsUnderManager(id);
+    @GetMapping("/manager/{managerId}/unhandled")
+    public ResponseEntity<List<EmployeeWithRequestsDTO>> getUnhandledRequestsUnderManager(@PathVariable Long managerId) {
+        List<EmployeeWithRequestsDTO> employeeWithRequests = employeeService.getUnhandledRequestsUnderManager(managerId);
         if (employeeWithRequests == null || employeeWithRequests.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

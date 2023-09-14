@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/response")
+@RequestMapping(path = "api/v1/responses")
 @Tag(name ="VacationResponse", description = "Endpoints to interact with VacationResponses")
 public class VacationResponseController {
 
@@ -31,9 +31,9 @@ public class VacationResponseController {
         return new ResponseEntity<>(vacationResponses, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<VacationResponse> getById(@PathVariable Long id) {
-        VacationResponse vacationResponse = vacationResponseService.findById(id);
+    @GetMapping("{responseId}")
+    public ResponseEntity<VacationResponse> getById(@PathVariable Long responseId) {
+        VacationResponse vacationResponse = vacationResponseService.findById(responseId);
         return new ResponseEntity<>(vacationResponse, HttpStatus.OK);
     }
 
@@ -47,9 +47,9 @@ public class VacationResponseController {
         }
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Void> updateResponse(@PathVariable Long id, @RequestBody VacationResponse newVacationResponse) {
-        VacationResponse oldVacationResponse = vacationResponseService.findById(id);
+    @PutMapping("{responseId}")
+    public ResponseEntity<Void> updateResponse(@PathVariable Long responseId, @RequestBody VacationResponse newVacationResponse) {
+        VacationResponse oldVacationResponse = vacationResponseService.findById(responseId);
         if(oldVacationResponse == null){
             return ResponseEntity.notFound().build();
         }
@@ -61,10 +61,10 @@ public class VacationResponseController {
 
         return ResponseEntity.noContent().build();
     }
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteResponse(@PathVariable Long id) {
+    @DeleteMapping("{responseId}")
+    public ResponseEntity<Void> deleteResponse(@PathVariable Long responseId) {
         try {
-            vacationResponseService.deleteById(id);
+            vacationResponseService.deleteById(responseId);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             // Log the exception and return an error response
