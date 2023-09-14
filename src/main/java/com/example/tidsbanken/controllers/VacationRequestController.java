@@ -87,7 +87,7 @@ public class VacationRequestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Operation(summary = "Update an existing Vocation request")
+    @Operation(summary = "Update an existing vacation request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "No content", content = @Content),
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
@@ -123,7 +123,7 @@ public class VacationRequestController {
 
         return ResponseEntity.noContent().build();
     }
-    @Operation(summary = "Get a Vacation request by ID")
+    @Operation(summary = "Get all vacation requests by an employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = VacationRequestDTO.class))
@@ -145,7 +145,14 @@ public class VacationRequestController {
 
 
 
-
+    @Operation(summary = "Get all vacation requests by employees under a specific manager")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = VacationRequestDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
     @GetMapping("/manager/{managerId}")
     public ResponseEntity<List<VacationRequestDTO>> getByManager(@PathVariable Long managerId) {
         List<VacationRequest> vacationRequests = vacationRequestService.findByManagerId(managerId);
