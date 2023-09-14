@@ -95,4 +95,17 @@ public class VacationRequestController {
 
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
+
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<List<VacationRequestDTO>> getByManager(@PathVariable Long managerId) {
+        List<VacationRequest> vacationRequests = vacationRequestService.findByManagerId(managerId);
+        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
+
+        for (VacationRequest vacationRequest : vacationRequests) {
+            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
+        }
+
+        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
+    }
+
 }

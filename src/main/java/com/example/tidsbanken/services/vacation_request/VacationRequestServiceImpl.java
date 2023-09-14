@@ -51,4 +51,8 @@ public class VacationRequestServiceImpl implements VacationRequestService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<VacationRequest> findByManagerId(Long managerId) {
+        return vacationRequestRepository.findByEmployee_Manager_EmployeeId(managerId);
+    }
 }
