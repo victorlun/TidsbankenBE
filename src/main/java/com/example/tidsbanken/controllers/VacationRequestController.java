@@ -55,18 +55,6 @@ public class VacationRequestController {
 
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
-
-    @GetMapping("/approved_or_pending")
-    public ResponseEntity<List<VacationRequestDTO>> getAllApprovedOrPending() {
-        List<VacationRequest> vacationRequests = vacationRequestService.findAllApprovedOrPending();
-        List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
-
-        for (VacationRequest vacationRequest : vacationRequests) {
-            vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
-        }
-
-        return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
-    }
     @Operation(summary = "Get a vacation request by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
