@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/blocked-periods")
 @Tag(name ="BlockedPeriod", description = "Endpoints to interact with BlockedPeriods")
@@ -94,5 +96,15 @@ public class BlockedPeriodController {
         } else {
             return new ResponseEntity<>("BlockedPeriod with ID " + blockedPeriodId + " not found.", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<List<BlockedPeriodDTO>> getByEmployee(@PathVariable Long managerId){
+        List<BlockedPeriod> blockedPeriods = blockedPeriodService.findByEmployee(managerId);
+        List<BlockedPeriodDTO> dtos = new ArrayList<>();
+        for(BlockedPeriod blockedPeriod : blockedPeriods){
+            dtos.add(blockedPeriodMapper.blockedPeriodToBlockedPeriodDto(blockedPeriod));
+        }
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 }
