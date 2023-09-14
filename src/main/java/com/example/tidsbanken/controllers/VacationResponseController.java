@@ -1,5 +1,6 @@
 package com.example.tidsbanken.controllers;
 
+import com.example.tidsbanken.mappers.VacationResponseMapper;
 import com.example.tidsbanken.model.dtos.VacationResponse.VacationResponseDTO;
 import com.example.tidsbanken.model.dtos.VacationResponse.VacationResponsePostDTO;
 import com.example.tidsbanken.model.entities.VacationResponse;
@@ -15,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +26,13 @@ import java.util.List;
 public class VacationResponseController {
 
     private final VacationResponseService vacationResponseService;
-
+    private final VacationResponseMapper vacationResponseMapper;
 
     @Autowired
-    public VacationResponseController(VacationResponseService vacationResponseService) {
+    public VacationResponseController(VacationResponseService vacationResponseService, VacationResponseMapper vacationResponseMapper) {
         this.vacationResponseService = vacationResponseService;
 
+        this.vacationResponseMapper = vacationResponseMapper;
     }
     @Operation(summary = "Get  a list of all vacation responses")
     @ApiResponses(value = {
@@ -69,8 +70,10 @@ public class VacationResponseController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     @PostMapping
-    public ResponseEntity<VacationResponse> createResponse(@RequestBody VacationResponse vacationResponse) {
+    public ResponseEntity<VacationResponse> createResponse(@RequestBody VacationResponsePostDTO dto) {
         try {
+            VacationResponse vacationResponse = vacationResponseMapper.PostDTOToVacationResponse(dto);
+
             vacationResponseService.add(vacationResponse);
             return new ResponseEntity<>(vacationResponse, HttpStatus.OK);
         } catch (Exception e){
