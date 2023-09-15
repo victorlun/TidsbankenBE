@@ -16,11 +16,11 @@ INSERT INTO blocked_period (start_date, end_date, employee_id) VALUES ('2023-09-
 INSERT INTO blocked_period (start_date, end_date, employee_id) VALUES ('2023-09-01', '2023-09-07', 4);
 
 --Dummy data for 'vacation_request' table
-INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-07-09', '2023-07-15', 5, 'HANDLED', 'PARENTAL_LEAVE', 'Parental leave for vacation.');
-INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-08-01', '2023-08-07', 4, 'HANDLED', 'VACATION_LEAVE', 'Annual leave for vacation.');
-INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-09-01', '2023-09-07', 6, 'PENDING', 'SICK_LEAVE', 'Recovering from illness.');
-INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-10-01', '2023-10-07', 7, 'HANDLED', 'PUBLIC_HOLIDAY', 'Extended public holiday.');
-INSERT INTO vacation_request (start_date, end_date, employee_id, status, vacation_type, notes) VALUES ('2023-09-22', '2023-09-22', 5, 'PENDING', 'SICK_LEAVE', 'Doctors appointment');
+INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, notes) VALUES ('2023-07-09', '2023-07-15', 5, 'PARENTAL_LEAVE', 'Parental leave for vacation.');
+INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, notes) VALUES ('2023-08-01', '2023-08-07', 4, 'VACATION_LEAVE', 'Annual leave for vacation.');
+INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, notes) VALUES ('2023-09-01', '2023-09-07', 6, 'SICK_LEAVE', 'Recovering from illness.');
+INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, notes) VALUES ('2023-10-01', '2023-10-07', 7, 'PUBLIC_HOLIDAY', 'Extended public holiday.');
+INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, notes) VALUES ('2023-09-22', '2023-09-22', 5, 'SICK_LEAVE', 'Doctors appointment');
 
 
 -- Dummy data for 'vacation_response' table

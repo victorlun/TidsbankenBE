@@ -17,14 +17,14 @@ public class LoginController {
                 HttpStatus.OK);
     }
     @GetMapping("admin")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> adminEndpoint() {
         return new ResponseEntity<>(
                 "Admin endpoint, accessible only for admins.",
                 HttpStatus.OK);
     }
     @GetMapping("restricted")
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<String> restrictedEndpoint() {
         return new ResponseEntity<>(
                 "A restricted endpoint, Both user and Admin can reach it",
