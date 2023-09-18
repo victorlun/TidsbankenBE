@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -42,11 +43,18 @@ public class VacationResponseController {
             @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
+
     @GetMapping
-    public ResponseEntity<List<VacationResponse>> getAll() {
+    public ResponseEntity<List<VacationResponseDTO>> getAll() {
         List<VacationResponse> vacationResponses = vacationResponseService.findAll().stream().toList();
-        return new ResponseEntity<>(vacationResponses, HttpStatus.OK);
+        List<VacationResponseDTO> vacationResponseDTOs = new ArrayList<>();
+        for(VacationResponse vacationResponse : vacationResponses){
+            vacationResponseDTOs.add(vacationResponseMapper.vacationResponseToDTO(vacationResponse));
+        }
+
+        return new ResponseEntity<>(vacationResponseDTOs, HttpStatus.OK);
     }
+
     @Operation(summary = "Get a vacation response by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
@@ -56,9 +64,10 @@ public class VacationResponseController {
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
     @GetMapping("{responseId}")
-    public ResponseEntity<VacationResponse> getById(@PathVariable Long responseId) {
+    public ResponseEntity<VacationResponseDTO> getById(@PathVariable Long responseId) {
         VacationResponse vacationResponse = vacationResponseService.findById(responseId);
-        return new ResponseEntity<>(vacationResponse, HttpStatus.OK);
+        VacationResponseDTO dto = vacationResponseMapper.vacationResponseToDTO(vacationResponse);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 
