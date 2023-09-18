@@ -25,8 +25,6 @@ public class VacationRequestDTO {
 
     private String lastName;
 
-
-
     @Schema(description = "The specified type for the vacation requested.", example = "VacationType.PARENTAL_LEAVE")
     private VacationType vacationType;
 
