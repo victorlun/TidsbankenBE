@@ -9,11 +9,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface VacationResponseMapper {
+public abstract class VacationResponseMapper {
 
     @Mapping(source = "vacationRequest.vacationRequestId", target = "vacationRequestId")
-    VacationResponseDTO vacationResponseToDTO(VacationResponse entity);
+    public abstract VacationResponseDTO vacationResponseToDTO(VacationResponse entity);
 
     @Mapping(target = "vacationRequest.vacationRequestId", source = "vacationRequestId" )
-    VacationResponse PostDTOToVacationResponse(VacationResponsePostDTO dto);
+    public abstract VacationResponse PostDTOToVacationResponse(VacationResponsePostDTO dto);
 }

@@ -134,14 +134,14 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/manager/{managerId}/unhandled")
-    public ResponseEntity<List<EmployeeWithRequestsDTO>> getUnhandledRequestsUnderManager(@PathVariable Long managerId) {
-        List<EmployeeWithRequestsDTO> employeeWithRequests = employeeService.getUnhandledRequestsUnderManager(managerId);
-        if (employeeWithRequests == null || employeeWithRequests.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(employeeWithRequests, HttpStatus.OK);
-        }
+   // @GetMapping("/manager/{managerId}/unhandled")
+   // public ResponseEntity<List<EmployeeWithRequestsDTO>> getUnhandledRequestsUnderManager(@PathVariable Long managerId) {
+   //     List<EmployeeWithRequestsDTO> employeeWithRequests = employeeService.getUnhandledRequestsUnderManager(managerId);
+   //     if (employeeWithRequests == null || employeeWithRequests.isEmpty()) {
+   //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+   //         }
+   //         return new ResponseEntity<>(employeeWithRequests, HttpStatus.OK);
+   //     }
 
 
 

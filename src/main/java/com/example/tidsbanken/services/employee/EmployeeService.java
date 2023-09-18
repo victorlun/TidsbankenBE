@@ -7,7 +7,7 @@ import com.example.tidsbanken.services.CrudService;
 import java.util.List;
 
 public interface EmployeeService extends CrudService<Employee, Long> {
-    List<EmployeeWithRequestsDTO> getUnhandledRequestsUnderManager(Long managerId);
+    //List<EmployeeWithRequestsDTO> getUnhandledRequestsUnderManager(Long managerId);
     void deleteManagerReference (Employee employee);
 
 

@@ -49,42 +49,42 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    @Override
-    public List<EmployeeWithRequestsDTO> getUnhandledRequestsUnderManager(Long managerId) {
-        // Find the manager with the given ID
-        Employee manager = employeeRepository.findById(managerId).orElse(null);
-        if (manager == null) {
-            return null;
-        }
-
-        // Find all employees under that manager
-        List<Employee> employees = employeeRepository.findByManager(manager);
-
-        // Convert Employee to EmployeeWithRequestsDTO
-        List<EmployeeWithRequestsDTO> allEmployees = employees.stream()
-                .map(employeeMapper::employeeToEmployeeWithRequestsDTO)
-                .collect(Collectors.toList());
-
-        // Return a filtered list with only Pending requests
-        return filterEmployeesAndRequests(allEmployees);
-    }
+   // @Override
+   // public List<EmployeeWithRequestsDTO> getUnhandledRequestsUnderManager(Long managerId) {
+   //     // Find the manager with the given ID
+   //     Employee manager = employeeRepository.findById(managerId).orElse(null);
+   //     if (manager == null) {
+   //         return null;
+   //     }
+//
+   //     // Find all employees under that manager
+   //     List<Employee> employees = employeeRepository.findByManager(manager);
+//
+   //     // Convert Employee to EmployeeWithRequestsDTO
+   //     List<EmployeeWithRequestsDTO> allEmployees = employees.stream()
+   //             .map(employeeMapper::employeeToEmployeeWithRequestsDTO)
+   //             .collect(Collectors.toList());
+//
+   //     // Return a filtered list with only Pending requests
+   //     return filterEmployeesAndRequests(allEmployees);
+   // }
 
     @Override
     public void deleteManagerReference(Employee employee) {
         employee.setManager(null);
     }
 
-    public List<EmployeeWithRequestsDTO> filterEmployeesAndRequests(List<EmployeeWithRequestsDTO> allEmployees) {
-        return allEmployees.stream()
-                .filter(employee -> employee.getRequests() != null && !employee.getRequests().isEmpty())  // filter out employees with empty or null requests
-                .map(employee -> {
-                    List<VacationRequestDTO> filteredRequests = employee.getRequests().stream()
-                            .filter(request -> Objects.equals(request.getVacationResponseStatus(), null))
-                            .collect(Collectors.toList());
-                    employee.setRequests(filteredRequests);
-                    return employee;
-                })
-                .filter(employee -> !employee.getRequests().isEmpty())  // filter out employees who have empty requests after previous filtering
-                .collect(Collectors.toList());
-    }
+ //  public List<EmployeeWithRequestsDTO> filterEmployeesAndRequests(List<EmployeeWithRequestsDTO> allEmployees) {
+ //      return allEmployees.stream()
+ //              .filter(employee -> employee.getRequests() != null && !employee.getRequests().isEmpty())  // filter out employees with empty or null requests
+ //              .map(employee -> {
+ //                  List<VacationRequestDTO> filteredRequests = employee.getRequests().stream()
+ //                          .filter(request -> Objects.equals(request.getVacationRequestId()), null))
+ //                          .collect(Collectors.toList());
+ //                  employee.setRequests(filteredRequests);
+ //                  return employee;
+ //              })
+ //              .filter(employee -> !employee.getRequests().isEmpty())  // filter out employees who have empty requests after previous filtering
+ //              .collect(Collectors.toList());
+ //  }
 }

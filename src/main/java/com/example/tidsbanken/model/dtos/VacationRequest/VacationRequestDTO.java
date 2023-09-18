@@ -33,8 +33,6 @@ public class VacationRequestDTO {
     @Schema(description = "Notes for the vacation request.", example = "Parental leave due to closed kindergarten.")
     private String notes;
 
-    private String vacationResponseStatus;
-
     private Long vacationResponseId;
 
 }
