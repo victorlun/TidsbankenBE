@@ -143,8 +143,6 @@ public class VacationRequestController {
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
 
-
-
     @Operation(summary = "Get all vacation requests by employees under a specific manager")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
