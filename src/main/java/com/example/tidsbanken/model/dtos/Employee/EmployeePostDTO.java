@@ -6,7 +6,10 @@ import lombok.Data;
 
 @Data
 public class EmployeePostDTO {
-    @Schema(description = "Manager of the employee")
+    @Schema(description = "ID of the employee", example = "2")
+    private Long employeeId;
+
+    @Schema(description = "ID of the manager of the employee", example = "1")
     private Long manager;
 
     @Schema(description = "First name of the employee", example = "John")

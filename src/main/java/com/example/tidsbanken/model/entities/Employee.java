@@ -19,7 +19,6 @@ import lombok.Setter;
 public class Employee {
     @Id
     @Schema(description = "ID of the employee", example = "12345")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
     private long employeeId;
 

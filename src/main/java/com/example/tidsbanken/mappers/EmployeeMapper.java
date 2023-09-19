@@ -24,7 +24,7 @@ public abstract class EmployeeMapper {
     @Mapping(target = "role", source = "employeePostDTO.role")
     @Mapping(target = "authRole", source = "employeePostDTO.authRole")
     @Mapping(target = "manager", source = "manager")
-    @Mapping(target = "employeeId", ignore = true)
+    @Mapping(target = "employeeId", source = "employeePostDTO.employeeId")
     public abstract Employee employeePostDTOToEmployee(EmployeePostDTO employeePostDTO, Employee manager);
 
 
