@@ -66,10 +66,11 @@ public class EmployeeController {
     })
     @CrossOrigin
     @GetMapping("/{employeeId}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long employeeId) {
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long employeeId) {
         Employee employee = employeeService.findById(employeeId);
+        EmployeeDTO dto = employeeMapper.employeeToEmployeeDTO(employee);
         if (employee != null) {
-            return new ResponseEntity<>(employee, HttpStatus.OK);
+            return new ResponseEntity<>(dto, HttpStatus.OK);
         } else {
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
