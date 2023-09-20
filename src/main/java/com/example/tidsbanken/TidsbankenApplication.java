@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories("com.example.tidsbanken")
 public class TidsbankenApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TidsbankenApplication.class, args);
 	}
