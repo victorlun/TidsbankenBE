@@ -16,8 +16,12 @@ import org.springframework.http.ResponseEntity;
 import static org.mockito.Mockito.*;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
@@ -51,7 +55,31 @@ class VacationRequestControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(vacationRequestDTOs, response.getBody());
     }
-
+    @Test
+    void testGetAllWhenNoRequestsExist() {
+        when(vacationRequestService.findAll()).thenReturn(Collections.emptyList());
+        ResponseEntity<List<VacationRequestDTO>> response = vacationRequestController.getAll();
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(Collections.emptyList(), response.getBody());
+    }
+    @Test
+    void testGetAllWhenRequestsExist() {
+        VacationRequest vacationRequest1 = new VacationRequest();
+        vacationRequest1.setStartDate(LocalDate.of(2023, 9, 1));
+        vacationRequest1.setEndDate(LocalDate.of(2023, 9, 10));
+        VacationRequest vacationRequest2 = new VacationRequest();
+        vacationRequest2.setStartDate(LocalDate.of(2023, 9, 5));
+        vacationRequest2.setEndDate(LocalDate.of(2023, 9, 15));
+        List<VacationRequest> vacationRequests = Arrays.asList(vacationRequest1, vacationRequest2);
+        List<VacationRequestDTO> expectedDTOs = vacationRequests
+                .stream()
+                .map(vacationRequestMapper::vacationRequestToVacationRequestDTO)
+                .collect(Collectors.toList());
+        when(vacationRequestService.findAll()).thenReturn(vacationRequests);
+        ResponseEntity<List<VacationRequestDTO>> response = vacationRequestController.getAll();
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedDTOs, response.getBody());
+    }
     @Test
     void testGetVocationRequestById_shouldReturnRequestId() {
         Long requestId = 1L;
@@ -63,7 +91,6 @@ class VacationRequestControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(dto, response.getBody());
     }
-
     @Test
     void testCreateVacationRequest_shouldCreateNewVacationRequest() {
         VacationRequestPostDTO postDTO = new VacationRequestPostDTO();
@@ -73,7 +100,6 @@ class VacationRequestControllerTest {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(vacationRequest, response.getBody());
     }
-
     @Test
     void testUpdateVacationRequest_shouldReturnNoContent() {
         Long requestId = 1L;

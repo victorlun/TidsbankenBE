@@ -83,13 +83,18 @@ public class EmployeeController {
     })
    @PostMapping
    @CrossOrigin
-   public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
+    public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
         Employee manager = employeeService.findById(employeeDto.getManager());
-        Employee employee = employeeService.add(
-               employeeMapper.employeePostDTOToEmployee(employeeDto, manager));
-       URI location = URI.create("/api/v1/employees" +employee.getEmployeeId());
-       return ResponseEntity.created(location).build();
-   }
+        try {
+            Employee employee = employeeService.add(employeeMapper.employeePostDTOToEmployee(employeeDto, manager));
+            URI location = URI.create("/api/v1/employees" + employee.getEmployeeId());
+            return ResponseEntity.created(location).build();
+        } catch (RuntimeException e) {
+            System.out.println("Error during employee creation");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @Operation(summary = "Update an existing employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "No content", content = @Content),
@@ -105,7 +110,6 @@ public class EmployeeController {
        if (existingEmployee == null) {
            return ResponseEntity.notFound().build();
        }
-
        if (!employeeId.equals(employeeUpdateDTO.getEmployeeId())) {
            return ResponseEntity.badRequest().build();
        }
@@ -115,9 +119,7 @@ public class EmployeeController {
        existingEmployee.setManager(employeeUpdateDTO.getManager());
        existingEmployee.setEmail(employeeUpdateDTO.getEmail());
        existingEmployee.setAuthRole(employeeUpdateDTO.getAuthRole());
-
        employeeService.update(existingEmployee);
-
        return ResponseEntity.noContent().build();
    }
     @Operation(summary = "Delete a Employee by its ID")
