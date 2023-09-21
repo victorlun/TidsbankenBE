@@ -83,18 +83,13 @@ public class EmployeeController {
     })
    @PostMapping
    @CrossOrigin
-    public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
+   public ResponseEntity<Void> createNewEmployee(@RequestBody EmployeePostDTO employeeDto) {
         Employee manager = employeeService.findById(employeeDto.getManager());
-        try {
-            Employee employee = employeeService.add(employeeMapper.employeePostDTOToEmployee(employeeDto, manager));
-            URI location = URI.create("/api/v1/employees" + employee.getEmployeeId());
-            return ResponseEntity.created(location).build();
-        } catch (RuntimeException e) {
-            System.out.println("Error during employee creation");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
+        Employee employee = employeeService.add(
+               employeeMapper.employeePostDTOToEmployee(employeeDto, manager));
+       URI location = URI.create("/api/v1/employees" +employee.getEmployeeId());
+       return ResponseEntity.created(location).build();
+   }
     @Operation(summary = "Update an existing employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "No content", content = @Content),
