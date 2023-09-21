@@ -1,8 +1,8 @@
 package com.tidsbanken.services.employee;
 
-import com.example.tidsbanken.mappers.EmployeeMapper;
-import com.example.tidsbanken.model.entities.Employee;
-import com.example.tidsbanken.repositories.EmployeeRepository;
+import com.tidsbanken.mappers.EmployeeMapper;
+import com.tidsbanken.models.entities.Employee;
+import com.tidsbanken.repositories.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

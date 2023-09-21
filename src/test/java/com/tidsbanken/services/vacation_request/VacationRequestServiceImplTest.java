@@ -1,7 +1,7 @@
 package com.tidsbanken.services.vacation_request;
 
-import com.example.tidsbanken.model.entities.VacationRequest;
-import com.example.tidsbanken.repositories.VacationRequestRepository;
+import com.tidsbanken.models.entities.VacationRequest;
+import com.tidsbanken.repositories.VacationRequestRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

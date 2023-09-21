@@ -1,9 +1,9 @@
 package com.tidsbanken.services.blocked_period;
 
-import com.example.tidsbanken.model.entities.BlockedPeriod;
-import com.example.tidsbanken.model.entities.Employee;
-import com.example.tidsbanken.repositories.BlockedPeriodRepository;
-import com.example.tidsbanken.services.employee.EmployeeService;
+import com.tidsbanken.models.entities.BlockedPeriod;
+import com.tidsbanken.models.entities.Employee;
+import com.tidsbanken.repositories.BlockedPeriodRepository;
+import com.tidsbanken.services.employee.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
