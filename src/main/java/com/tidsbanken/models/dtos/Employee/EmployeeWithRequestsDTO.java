@@ -2,7 +2,6 @@ package com.tidsbanken.models.dtos.Employee;
 
 import com.tidsbanken.models.dtos.VacationRequest.VacationRequestDTO;
 import lombok.Data;
-
 import java.util.List;
 @Data
 public class EmployeeWithRequestsDTO {

@@ -8,7 +8,6 @@ import com.tidsbanken.models.dtos.VacationRequest.VacationRequestDTO;
 import com.tidsbanken.models.entities.Employee;
 import com.tidsbanken.models.entities.VacationRequest;
 import org.mapstruct.*;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,8 +25,6 @@ public abstract class EmployeeMapper {
     @Mapping(target = "manager", source = "manager")
     @Mapping(target = "employeeId", source = "employeePostDTO.employeeId")
     public abstract Employee employeePostDTOToEmployee(EmployeePostDTO employeePostDTO, Employee manager);
-
-
 
     @Mapping(target = "manager.employeeId", source = "managerId")
     public abstract Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
@@ -49,7 +46,6 @@ public abstract class EmployeeMapper {
                     return employee;
                 }).collect(Collectors.toSet());
     }
-
     @Mapping(source = "employeeId", target = "employeeId")
     @Mapping(source = "manager.employeeId", target = "managerId")
     @Mapping(source = "vacationRequests", target = "requests")
@@ -68,7 +64,6 @@ public abstract class EmployeeMapper {
             @Mapping(source = "employee.lastName", target = "lastName"),
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
-
     public abstract Employee employeeUpdateDtoToEmployee(EmployeeUpdateDTO employeeUpdateDTO);
 
 }

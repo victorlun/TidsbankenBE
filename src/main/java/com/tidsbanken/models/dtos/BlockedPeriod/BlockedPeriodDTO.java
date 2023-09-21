@@ -6,11 +6,8 @@ import java.time.LocalDate;
 @Data
 public class BlockedPeriodDTO {
     private Long blockedPeriodId;
-
     private LocalDate startDate;
-
     private LocalDate endDate;
 
-    //private Employee employee;
 
 }

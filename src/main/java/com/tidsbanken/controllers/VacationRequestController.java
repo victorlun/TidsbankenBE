@@ -99,13 +99,11 @@ public class VacationRequestController {
         if(oldVacationRequest == null || employee == null){
             return ResponseEntity.notFound().build();
         }
-
         oldVacationRequest.setVacationType(newRequest.getVacationType());
         oldVacationRequest.setEmployee(employee);
         oldVacationRequest.setStartDate(newRequest.getStartDate());
         oldVacationRequest.setEndDate(newRequest.getEndDate());
         oldVacationRequest.setNotes(newRequest.getNotes());
-
         vacationRequestService.update(oldVacationRequest);
 
         return ResponseEntity.noContent().build();
@@ -134,11 +132,9 @@ public class VacationRequestController {
     public ResponseEntity<List<VacationRequestDTO>> getByEmployee(@PathVariable Long employeeId) {
         List<VacationRequest> vacationRequests = vacationRequestService.findByEmployeeId(employeeId);
         List<VacationRequestDTO> vacationRequestDTOs = new ArrayList<>();
-
         for (VacationRequest vacationRequest : vacationRequests) {
             vacationRequestDTOs.add(vacationRequestMapper.vacationRequestToVacationRequestDTO(vacationRequest));
         }
-
         return new ResponseEntity<>(vacationRequestDTOs, HttpStatus.OK);
     }
 

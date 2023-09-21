@@ -4,11 +4,8 @@ import com.tidsbanken.utils.enumerators.AuthRole;
 import com.tidsbanken.models.entities.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
-
 import java.util.HashSet;
 import java.util.Set;
-
 
 @Data
 public class EmployeeUpdateDTO {

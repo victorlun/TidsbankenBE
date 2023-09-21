@@ -8,10 +8,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public abstract class VacationResponseMapper {
-
     @Mapping(source = "vacationRequest.vacationRequestId", target = "vacationRequestId")
     public abstract VacationResponseDTO vacationResponseToDTO(VacationResponse entity);
-
     @Mapping(target = "vacationRequest.vacationRequestId", source = "vacationRequestId" )
     public abstract VacationResponse PostDTOToVacationResponse(VacationResponsePostDTO dto);
 }
