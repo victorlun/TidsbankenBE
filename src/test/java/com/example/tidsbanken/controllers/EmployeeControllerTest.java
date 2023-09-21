@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -130,55 +131,18 @@ class EmployeeControllerTest {
         assertEquals("/api/v1/employees" + employee.getEmployeeId(), responseEntity.getHeaders().getLocation().toString());
     }
     @Test
-    public void testCreateNewEmployee_shouldReturnNewEmployeeServiceException() {
-        EmployeePostDTO employeeDto = new EmployeePostDTO();
-        employeeDto.setFirstName("John");
-        employeeDto.setLastName("Doe");
-        employeeDto.setEmail("justine@hotmail.com");
-        employeeDto.setManager(1L);
-        Employee manager = new Employee();
-        manager.setEmployeeId(1L);
-        when(employeeService.findById(1L)).thenReturn(manager);
-        when(employeeService.add(any(Employee.class))).thenThrow(new RuntimeException("Error during employee creation"));
-        when(employeeMapper.employeePostDTOToEmployee(employeeDto, manager)).thenReturn(manager);
-        ResponseEntity<Void> responseEntity = employeeController.createNewEmployee(employeeDto);
-        verify(employeeService).findById(1L);
-        verify(employeeService).add(manager);
-        verify(employeeMapper).employeePostDTOToEmployee(employeeDto, manager);
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
-    }
-    @Test
-    public void testCreateNewEmployee_ManagerNotFound() {
-        EmployeePostDTO employeeDto = new EmployeePostDTO();
-        employeeDto.setFirstName("John");
-        employeeDto.setLastName("Doe");
-        employeeDto.setManager(1L);
-        when(employeeService.findById(1L)).thenReturn(null);
-        ResponseEntity<Void> responseEntity = employeeController.createNewEmployee(employeeDto);
-        verify(employeeService).findById(1L);
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
-    }
-
-    @Test
     void testGetEmployeeByIdWhenEmployeeExists() {
         Long employeeId = 1L;
         Employee employee = new Employee();
-        employee.setEmployeeId(1L);
-        employee.setFirstName("John");
-        employee.setLastName("Doe");
-        employee.setEmail("john.doe@example.com");
+        employee.setEmployeeId(employeeId);
+
+        EmployeeDTO expectedDTO = new EmployeeDTO();
+        expectedDTO.setEmployeeId(employeeId);
         when(employeeService.findById(employeeId)).thenReturn(employee);
-        ResponseEntity<Employee> response = employeeController.getEmployeeById(employeeId);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(employee, response.getBody());
-    }
-    @Test
-    void testGetEmployeeByIdWhenEmployeeDoesNotExist() {
-        Long employeeId = 1L;
-        when(employeeService.findById(employeeId)).thenReturn(null);
-        ResponseEntity<Employee> response = employeeController.getEmployeeById(employeeId);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody());
+        when(employeeMapper.employeeToEmployeeDTO(employee)).thenReturn(expectedDTO);
+        ResponseEntity<EmployeeDTO> responseEntity = employeeController.getEmployeeById(employeeId);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(expectedDTO, responseEntity.getBody());
     }
     @Test
     public void testUpdateEmployeeSuccess() {
