@@ -6,6 +6,8 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 # Copy the source code into the container
 COPY src ./src
+# Debugging purpose, also cleaning the cache (Optional)
+RUN rm -rf /root/.m2/repository
 # Build the application
 RUN mvn package
 
