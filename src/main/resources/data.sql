@@ -1,6 +1,5 @@
-SELECT * FROM employee;
+
 --Dummy data for 'employee' table
-/*
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (1, 1, 'Alice', 'Johnson', 'alice.johnson@email.com', 'Senior Manager', 'MANAGER');
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (2, 1, 'Bob', 'Smith', 'bob.smith@email.com', 'Junior Developer', 'EMPLOYEE');
 INSERT INTO employee (employee_id, manager_id, first_name, last_name, email, work_role, auth_role) VALUES (3, 1, 'Charlie', 'Brown', 'charlie.brown@email.com', 'Mid-level Developer', 'EMPLOYEE');
@@ -32,4 +31,3 @@ INSERT INTO vacation_request (start_date, end_date, employee_id, vacation_type, 
 INSERT INTO vacation_response (vacation_response_id, vacation_request_id, vacation_response, response_comment) VALUES (4, 6, 'DENIED', 'This is not a valid reason for parental leave...');
 
 
- */
