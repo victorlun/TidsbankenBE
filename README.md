@@ -88,7 +88,7 @@ Relationship between entites are as follow:
 
 [Azure](https://portal.azure.com)
 
-Developed By
+Collaborators
 
 [Justine Jensen](https://github.com/JustineJensen)
 
