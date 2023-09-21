@@ -25,10 +25,8 @@ import java.util.List;
 @RequestMapping(path = "api/v1/responses")
 @Tag(name ="VacationResponse", description = "Endpoints to interact with VacationResponses")
 public class VacationResponseController {
-
     private final VacationResponseService vacationResponseService;
     private final VacationResponseMapper vacationResponseMapper;
-
     @Autowired
     public VacationResponseController(VacationResponseService vacationResponseService, VacationResponseMapper vacationResponseMapper) {
         this.vacationResponseService = vacationResponseService;
@@ -51,7 +49,6 @@ public class VacationResponseController {
         for(VacationResponse vacationResponse : vacationResponses){
             vacationResponseDTOs.add(vacationResponseMapper.vacationResponseToDTO(vacationResponse));
         }
-
         return new ResponseEntity<>(vacationResponseDTOs, HttpStatus.OK);
     }
 
@@ -69,7 +66,6 @@ public class VacationResponseController {
         VacationResponseDTO dto = vacationResponseMapper.vacationResponseToDTO(vacationResponse);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-
 
     @Operation(summary = "create a new vacation response")
     @ApiResponses(value = {
@@ -121,7 +117,6 @@ public class VacationResponseController {
             vacationResponseService.deleteById(responseId);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            // Log the exception and return an error response
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

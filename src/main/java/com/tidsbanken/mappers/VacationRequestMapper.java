@@ -16,7 +16,6 @@ public abstract class VacationRequestMapper {
             @Mapping(source = "employee.lastName", target = "lastName"),
     })
     public abstract VacationRequestDTO vacationRequestToVacationRequestDTO(VacationRequest vacationRequest);
-
     @Mappings({
             @Mapping(source = "startDate", target ="startDate"),
             @Mapping(source = "endDate", target ="endDate"),

@@ -15,12 +15,10 @@ public class VacationResponseServiceImpl implements VacationResponseService {
         this.vacationResponseRepository = vacationResponseRepository;
         this.jdbcTemplate = jdbcTemplate;
     }
-
     @Override
     public VacationResponse findById(Long id) {
         return vacationResponseRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
     }
-
     @Override
     public Collection<VacationResponse> findAll() {
         return vacationResponseRepository.findAll();
@@ -30,7 +28,6 @@ public class VacationResponseServiceImpl implements VacationResponseService {
     public VacationResponse add(VacationResponse vacationResponse) {
         return vacationResponseRepository.save(vacationResponse);
     }
-
     @Override
     public void update(VacationResponse vacationResponse) {
         vacationResponseRepository.save(vacationResponse);

@@ -19,12 +19,10 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
 
         this.employeeService = employeeService;
     }
-
     @Override
     public BlockedPeriod findById(Long id) {
         return blockedPeriodRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
     }
-
     @Override
     public Collection<BlockedPeriod> findAll() {
         return blockedPeriodRepository.findAll();
@@ -45,7 +43,6 @@ public class BlockedPeriodServiceImpl implements BlockedPeriodService {
         blockedPeriodRepository.deleteById(id);
 
     }
-
     @Override
     public List<BlockedPeriod> findByEmployee(Long employeeId) {
         Employee manager = employeeService.findById(employeeId);

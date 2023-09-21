@@ -29,7 +29,6 @@ import java.util.Collection;
 public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeMapper employeeMapper;
-
     @Autowired
     public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
@@ -99,7 +98,6 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
     })
    @CrossOrigin
-   //@PreAuthorize("hasAnyRole('user', 'admin')")
    @PutMapping("/{employeeId}")
    public ResponseEntity<Void> updateEmployee(@PathVariable Long employeeId, @RequestBody EmployeeUpdateDTO employeeUpdateDTO) {
        Employee existingEmployee = employeeService.findById(employeeId);
