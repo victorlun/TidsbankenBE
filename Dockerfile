@@ -1,4 +1,4 @@
-# Stage 1: Build the application
+# Stage 1: Build and Test the application
 FROM maven:3.9.3-amazoncorretto-17 AS build
 WORKDIR /app
 COPY pom.xml .
@@ -6,10 +6,8 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 # Copy the source code into the container
 COPY src ./src
-# Debugging purpose, also cleaning the cache
-RUN rm -rf /root/.m2/repository
-RUN mvn package -DskipTests
-
+# Build the application
+RUN mvn package
 
 # Stage 2: Create the runtime image
 FROM eclipse-temurin:17-alpine
