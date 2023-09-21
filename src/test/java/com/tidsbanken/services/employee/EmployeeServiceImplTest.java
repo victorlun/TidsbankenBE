@@ -1,4 +1,4 @@
-package com.example.tidsbanken.services.employee;
+package com.tidsbanken.services.employee;
 
 import com.example.tidsbanken.mappers.EmployeeMapper;
 import com.example.tidsbanken.model.entities.Employee;

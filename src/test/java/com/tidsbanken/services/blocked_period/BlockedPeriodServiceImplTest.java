@@ -1,4 +1,4 @@
-package com.example.tidsbanken.services.blocked_period;
+package com.tidsbanken.services.blocked_period;
 
 import com.example.tidsbanken.model.entities.BlockedPeriod;
 import com.example.tidsbanken.model.entities.Employee;

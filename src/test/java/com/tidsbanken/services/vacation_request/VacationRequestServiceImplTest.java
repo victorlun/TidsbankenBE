@@ -1,4 +1,4 @@
-package com.example.tidsbanken.services.vacation_request;
+package com.tidsbanken.services.vacation_request;
 
 import com.example.tidsbanken.model.entities.VacationRequest;
 import com.example.tidsbanken.repositories.VacationRequestRepository;
