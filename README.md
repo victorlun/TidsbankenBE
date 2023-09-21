@@ -72,6 +72,8 @@ Relationship between entites are as follow:
  - employee.employee_id are FK to vacation_request.employee_id
  - vacation_request.vacation_request_id are FK to vacation_response.vacation_request_id
 
+## Deployment
+The application is containerized using Docker, ensuring that it runs consistently across different computing environments. It is hosted on Microsoft Azure to take advantage of its cloud scalability and robustness. Continuous Integration/Continuous Deployment (CI/CD) is implemented via GitHub Actions. This automates the build, test, and deployment phases, streamlining the development workflow and ensuring that updates can be rolled out efficiently.
 
 # Built With
 [IntelliJ IDEA](https://www.jetbrains.com/idea/)
