@@ -4,6 +4,7 @@ The Tidsbanken app is a Java Spring Boot application designed to streamline the 
 
 [Github Repo - Frontend](https://github.com/williamevans98/TidsbankenFE)
 
+[User guide - Employee Functionality](https://github.com/victorlun/TidsbankenBE/blob/main/User%20Guide%20-%20Employee%20Functionality.md)
 # Installation
 
 To set up the project, ensure you have the following prerequisites installed:
