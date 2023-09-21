@@ -15,6 +15,16 @@ To set up the project, ensure you have the following prerequisites installed:
 ## Swagger
 You can access comprehensive endpoint documentation through Swagger on our hosted Azure website by visiting the following link: [Swagger Documentation](https://tbanken.azurewebsites.net/swagger-ui/index.html#/) 
 
+# API Responses
+The RESTful APIs adhere to the following response guidelines:
+- Most successful requests return either a 200 OK, 201 Created, or 204 No Content response.
+- All instances where a database record is created return a 201 Created response, along with the location of the created resource (ID).
+- Instances where input validation fails or incorrect data is passed to an endpoint return a 400 Bad Request response.
+- Unauthenticated user attempts to access strictly authorized endpoints return a 401 Unauthorized response, even if the requested resources don't exist.
+- Requests where the user is authenticated but not authorized to view a particular resource return a 403 Forbidden response.
+- Requests made to unknown endpoints return a 404 Not Found response.
+- Any request that causes the server to enter an error state fails immediately, without exiting the server process, and returns a 500 Internal Server Error response.
+
 # Built With
 [IntelliJ IDEA] (https://www.jetbrains.com/idea/)
 
