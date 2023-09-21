@@ -4,7 +4,7 @@
 ---
 
 <h1 id="user-guide---manager-functionality">User Guide - Manager Functionality</h1>
-<p>This is a user guide for the manager role in Tidsbanken and the functionalities that come with it.</p>
+<p>This is a user guide for the manager role in Tidsbanken and the functionality that come with it.</p>
 <blockquote>
 <p>NOTE:  You will have the same functionality as a employee. For information about that please see <a href="https://github.com/victorlun/TidsbankenBE/blob/main/User%20Guide%20-%20Employee%20Functionality.md">User Guide - Employee Functionality</a>. This guide will only cover the manager-specific functionality.</p>
 </blockquote>
@@ -37,7 +37,7 @@ Enter your own credentials or use our sample user:</p>
 <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/BbTv7FR7/createblockedperiod.png" alt="createblockedperiod" width="500"></a><br><br></p>
 </blockquote>
 <h3 id="blocked-periods">Blocked Periods</h3>
-<p>Underneath <em>Create Blocked Period</em> you will see a list of all of the blocked periods sorted on start date. Stating a <strong>Start Date</strong> and a <strong>End Date</strong>.</p>
+<p>Underneath <em>Create Blocked Period</em> you will see a list of all of the blocked periods sorted on start date. Each entry has a <strong>Start Date</strong> and a <strong>End Date</strong>. You can also simply delete blocked periods by hitting the button called <strong>Delete</strong>.</p>
 <blockquote>
 <p>NOTE: You will able to see all the blocked periods, even historical ones. This is by design to give you as a manager a feel for how often you are issuing blocked periods.</p>
 </blockquote>
