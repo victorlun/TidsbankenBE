@@ -2,7 +2,7 @@
 
 The Tidsbanken app is a Java Spring Boot application designed to streamline the management of employee holiday requests and foster improved organizational communication. It simplifies and accelerates the process of handling employee holiday requests, saving valuable time and resources. The application seamlessly integrates with a PostgreSQL database, ensuring robust data storage and reliability. To ensure secure access and protect sensitive information, users undergo authentication and authorization via Keycloak, serving as the trusted identity provider.
 
-[Github Repo - Frontend](https://github.com/williamevans98/TidsbankenFE)
+[Github Repo - Frontend](https://github.com/victorlun/TidsbankenFE)
 
 [User Guide - Employee Functionality](https://github.com/victorlun/TidsbankenBE/blob/main/User%20Guide%20-%20Employee%20Functionality.md)
 
